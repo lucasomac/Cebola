@@ -1,0 +1,161 @@
+Helpers
+
+    tudo = [0 .. 0xffff];
+    /* Letras e Digitos */
+    digito = ['0'..'9'];
+    letra = ['a'..'z'] | ['A' ..'Z'];   
+    hexa = ['a'..'f'] | ['A' .. 'F'];
+    sem_asterisco = [tudo - '*'];
+    sem_asterisco_barra = [sem_asterisco - '/']; 
+         
+    /* Caracteres de espaco */
+    tab = 9;
+    carriage_return = 13;
+    nova_linha = 10; //new Line
+    //eol = nl | cr | cr nl;
+    eol = carriage_return | nova_linha | carriage_return nova_linha;
+    nao_linha_fim = [tudo -[nova_linha + carriage_return]];
+    underscore = '_';
+    string = '''(nao_linha_fim)*''' ;
+    branco = (' ' | tab | eol)+;
+States
+    normal, /* The first state is the initial state. */
+    comentario;
+
+Tokens
+
+/* Palavras reservadas */
+string = 'caractere';
+inicio = 'inicio';
+fimprograma= 'fim.';
+se = 'se';
+fimse = 'fimse';
+senao = 'senao';
+enquanto = 'enquanto';
+fimenquanto = 'fimenquanto';
+para = 'para';
+avalie = 'avalie';
+fimavalie = 'fimavalie';
+caso = 'caso';
+repita = 'repita';
+ate = 'ate';
+de = 'de';
+faca = 'faca';
+passo = 'passo';
+verdadeiro = 'verdadeiro';
+falso = 'falso';
+booleano = 'booleano';
+programa = 'programa';
+inteiro = 'inteiro';
+real = 'real';
+leia = 'leia';
+escreva = 'escreva';
+vetor = 'vetor';
+const = 'const';
+
+/*Especificacao para producoes*/
+token_specifier = 'T';
+production_specifier = 'P';
+
+/*Operadores aritimeticos*/
+atrib = ':=';
+soma = '+';
+sub = '-';
+mult = '*';
+div = '/';
+mod = '%';
+
+/*Operadores logicos*/
+maiorq = '>';
+menorq = '<';
+maiorigualq = '>=';
+menorigualq = '<=';
+
+/*Operadores Booleanos*/
+nao = 'nao';
+e = 'e';
+ou = 'ou';
+igual = '=';
+diferente = '<>';
+
+/*Delimitadores*/
+aparentese = '(';
+fparentese = ')';
+l_bkt = '[';
+r_bkt = ']';
+virg = ',';
+pontoevirg = ';';
+ponto = '.';
+doispontos = ':';
+
+//espaco = ' ';
+//tab = tab;
+//novalinha = line_feed;
+
+/*Comentarios*/
+comentlinha = '//'(nao_linha_fim)* nova_linha;
+//coment_bloco = '/*' sem_asterisco* '*'+ (sem_asterisco_barra sem_asterisco* '*'+)* '/';
+abrebloco = '/*';
+fechabloco = '*/' ;
+
+/* Identificadores (letras, numeros) */
+id = (underscore | letra)(letra | digito | underscore)*;
+num = digito+;
+
+blank = branco+;
+
+Ignored Tokens
+
+    blank,
+    comentlinha;//,//fechabloco,abrebloco;
+    //coment_bloco;
+
+Productions
+program = programa id inicio declaracao* comando* fimprograma;
+
+declaracao = tipo doispontos lista_declaracao* var pontoevirg | const id valor pontoevirg;
+lista_declaracao = var virg;
+tipo = real | inteiro | caractere;
+var = id | id l_bkt num r_bkt;
+/*
+programa : 'programa' ID 'inicio' {declaracao} {comando} 'fim.'
+declaracao : tipo ':' {var ','} var ';'
+| 'const' ID valor ';'
+tipo : 'real' | 'inteiro' | 'caractere'
+var : ID | ID '[' N_INT ']'
+valor : STRING | N_INT | N_REAL
+comando : var ':=' exp ';'
+| 'leia' '(' {var ','} var ')' ';'
+| 'escreva' '(' {exp ','} exp ')' ';'
+| 'se' '(' exp-logica ')' 'entao' {comando} comando ['senao' {comando}
+comando] 'fim se' ';'
+| 'avalie' '(' exp ')' {'caso' valor ':' {comando} comando} ['senao' ':'
+{comando} comando] 'fim avalie' ';'
+| 'enquanto' '(' exp-logica ')' 'faca' {comando} comando 'fim enquanto'
+';'
+| 'repita' {comando} comando 'ate' '(' exp-logica ')' ';'
+| 'para' var 'de' N_INT 'ate' N_INT 'faca' {comando} comando
+'fim para' ';'
+| 'para' var 'de' N_INT 'passo' N_INT 'ate' N_INT 'faca' {comando}
+comando 'fim para' ';'
+exp : valor
+| var
+| '(' exp ')'
+| '-' exp
+| exp '+' exp
+| exp '-' exp
+| exp '*' exp
+| exp '/' exp
+| exp-logica
+exp-logica:
+'(' exp-logica ')'
+| exp '=' exp
+| exp '<>' exp
+| exp '<=' exp
+| exp '>=' exp
+| exp '<' exp
+| exp '>' exp
+| 'nao' exp-logica
+| exp-logica 'e' exp-logica
+| exp-logica 'ou' exp-logica
+| exp-logica 'xor' exp-logica */

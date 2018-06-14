@@ -69,6 +69,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseStart(Start node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAProgram(AProgram node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTString(TString node)
     {
         defaultCase(node);
@@ -93,6 +105,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTFimse(TFimse node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTSenao(TSenao node)
     {
         defaultCase(node);
@@ -100,6 +118,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTEnquanto(TEnquanto node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTFimenquanto(TFimenquanto node)
     {
         defaultCase(node);
     }
@@ -117,7 +141,43 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTFimavalie(TFimavalie node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTCaso(TCaso node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTRepita(TRepita node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTAte(TAte node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTDe(TDe node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTFaca(TFaca node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTPasso(TPasso node)
     {
         defaultCase(node);
     }
@@ -172,6 +232,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTVetor(TVetor node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTConst(TConst node)
     {
         defaultCase(node);
     }

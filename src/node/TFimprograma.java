@@ -9,12 +9,12 @@ public final class TFimprograma extends Token
 {
     public TFimprograma()
     {
-        super.setText("fim");
+        super.setText("fim.");
     }
 
     public TFimprograma(int line, int pos)
     {
-        super.setText("fim");
+        super.setText("fim.");
         setLine(line);
         setPos(pos);
     }

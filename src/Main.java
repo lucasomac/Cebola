@@ -1,14 +1,19 @@
 import lexer.*;
 import node.*;
 import java.io.*;
+import parser.Parser;
+import parser.ParserException;
 
 public class Main {
 
-    public static void main(String[] args) throws LexerException, IOException {
+    public static void main(String[] args) throws LexerException, IOException, ParserException {
         Lexer lexer = new Lexer(new PushbackReader(new FileReader(args[0]), 1024));
         Main main = new Main();
         Token token = null;
         main.AnaliseLexica(new PushbackReader(new FileReader(args[0]), 1024), lexer, token);
+        Parser parser = new Parser(lexer);
+        Start tree = parser.parse();
+        tree.toString();
         System.out.println();
         System.out.println("Análise sintática bem sucedida !");
     }
@@ -22,9 +27,9 @@ public class Main {
                 if (token instanceof TAbrebloco) {
                     Aninhado ninho = new Aninhado(in, lexer, token);
                     ninho.filter();
-                    token = ninho.getToken();
-                    lexer = ninho.getLexer();
-                    ninho = null;
+//                    token = ninho.getToken();
+//                    lexer = ninho.getLexer();
+//                    ninho = null;
                 } else if (token instanceof TFechabloco) {
                     System.out.print("Erro de comentario de bloco. Linha: " + token.getLine());
                     System.out.print(", posicao: " + token.getPos() + ". : TComentarioBlocoFimErrado");
