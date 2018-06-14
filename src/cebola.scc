@@ -100,7 +100,8 @@ fechabloco = '*/' ;
 
 /* Identificadores (letras, numeros) */
 id = (underscore | letra)(letra | digito | underscore)*;
-num = digito+;
+num_inteiro = digito+;
+
 
 blank = branco+;
 
@@ -117,6 +118,9 @@ declaracao = tipo doispontos lista_declaracao* var pontoevirg | const id valor p
 lista_declaracao = var virg;
 tipo = real | inteiro | caractere;
 var = id | id l_bkt num r_bkt;
+num_real = digito+ pontoevirg digito+;
+
+valor = string | num_real | num_inteiro;
 /*
 programa : 'programa' ID 'inicio' {declaracao} {comando} 'fim.'
 declaracao : tipo ':' {var ','} var ';'

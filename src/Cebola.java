@@ -4,11 +4,11 @@ import java.io.*;
 import parser.Parser;
 import parser.ParserException;
 
-public class Main {
+public class Cebola {
 
     public static void main(String[] args) throws LexerException, IOException, ParserException {
         Lexer lexer = new Lexer(new PushbackReader(new FileReader(args[0]), 1024));
-        Main main = new Main();
+        Cebola main = new Cebola();
         Token token = null;
         main.AnaliseLexica(new PushbackReader(new FileReader(args[0]), 1024), lexer, token);
         Parser parser = new Parser(lexer);
