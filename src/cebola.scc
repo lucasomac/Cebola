@@ -16,7 +16,7 @@ Helpers
     eol = carriage_return | nova_linha | carriage_return nova_linha;
     nao_linha_fim = [tudo -[nova_linha + carriage_return]];
     underscore = '_';
-    string = '''(nao_linha_fim)*''' ;
+    
     branco = (' ' | tab | eol)+;
 States
     normal, /* The first state is the initial state. */
@@ -25,29 +25,36 @@ States
 Tokens
 
 /* Palavras reservadas */
-string = 'caractere';
+caractere = 'caractere';
+inteiro = 'inteiro';
+real = 'real';
+booleano = 'booleano';
+
 inicio = 'inicio';
 fimprograma= 'fim.';
+
 se = 'se';
-fimse = 'fimse';
 senao = 'senao';
+fimse = 'fim se';
+
 enquanto = 'enquanto';
-fimenquanto = 'fimenquanto';
+faca = 'faca';
+fimenquanto = 'fim enquanto';
+
 para = 'para';
+de = 'de';
+ate = 'ate';
+fimpara = 'fim para';
 avalie = 'avalie';
-fimavalie = 'fimavalie';
+fimavalie = 'fim avalie';
 caso = 'caso';
 repita = 'repita';
-ate = 'ate';
-de = 'de';
-faca = 'faca';
+
 passo = 'passo';
 verdadeiro = 'verdadeiro';
 falso = 'falso';
-booleano = 'booleano';
+
 programa = 'programa';
-inteiro = 'inteiro';
-real = 'real';
 leia = 'leia';
 escreva = 'escreva';
 vetor = 'vetor';
@@ -88,20 +95,16 @@ pontoevirg = ';';
 ponto = '.';
 doispontos = ':';
 
-//espaco = ' ';
-//tab = tab;
-//novalinha = line_feed;
-
 /*Comentarios*/
 comentlinha = '//'(nao_linha_fim)* nova_linha;
-//coment_bloco = '/*' sem_asterisco* '*'+ (sem_asterisco_barra sem_asterisco* '*'+)* '/';
 abrebloco = '/*';
 fechabloco = '*/' ;
 
 /* Identificadores (letras, numeros) */
 id = (underscore | letra)(letra | digito | underscore)*;
 num_inteiro = digito+;
-
+num_real = '-'? digito+ ',' digito+;
+string = '''(nao_linha_fim)*''' ;
 
 blank = branco+;
 
@@ -112,30 +115,56 @@ Ignored Tokens
     //coment_bloco;
 
 Productions
-prog = programa id inicio lista_declaracao comando fimprograma;
+prog = programa id inicio lista_declaracao* comando* fimprograma;
 
-lista_declaracao = lista_declaracao var virg | var;
+lista_declaracao = declaracao+;
+var_vir = var virg;
+lista_var = var_vir+;
 
-declaracao = tipo doispontos lista_declaracao var pontoevirg | const id valor pontoevirg;
-
-
-
-tipo = real | inteiro | caractere;
-
+valor = num_inteiro 
+        | num_real 
+        | string;
+tipo = real | inteiro | caractere | booleano;
 var = id | id l_bkt num_inteiro r_bkt;
 
-num_real = digito+ pontoevirg digito+;
+declaracao = tipo doispontos lista_var? var pontoevirg | const id valor pontoevirg;
+
+
 /*
-valor = string | num_real | num_inteiro;
 comando = var atrib exp pontoevirg
-| leia aparentese {var virg} var fparentese pontoevirg
-| escreva aparentese {exp virg} exp fparentese pontoevirg
+| leia aparentese lista_var? var fparentese pontoevirg
+| escreva aparentese lista_exp? exp fparentese pontoevirg
 | se aparentese exp-logica fparentese entao {comando} comando [senao {comando} comando] fimse pontoevirg
 | avalie aparentese exp fparentese {caso valor doispontos {comando} comando} [senao doispontos {comando} comando] fimavalie pontoevirg
 | enquanto aparentese exp-logica fparentese faca {comando} comando fimenquanto pontoevirg
 | repita {comando} comando ate aparentese exp-logica fparentese pontoevirg
 | para var de num_inteiro ate num_inteiro faca {comando} comando fimpara pontoevirg
 | para var de num_inteiro passo num_inteiro ate num_inteiro faca {comando} comando fimpara pontoevirg
+
+exp_vir = exp virg;
+lista_exp = exp_vir+;
+
+
+exp = valor
+    | esq_parentese exp dir_parentese
+    | menos exp
+    | exp mais exp
+    | exp menos exp
+    | exp mult exp
+    | exp div exp
+    | exp_logica;
+    
+	exp_logica= esq_parentese exp_logica esq_parentese
+			| exp igual exp
+			| exp diferente exp
+			| exp menor_igual exp
+			| exp maior_igual exp
+			| exp menor exp
+			| exp maior exp
+			| nao exp_logica
+			| exp_logica e exp_logica
+			| exp_logica ou exp_logica
+			| exp_logica xor exp_logica;
 /*
 programa : 'programa' ID 'inicio' {declaracao} {comando} 'fim.'
 declaracao : tipo ':' {var ','} var ';'
