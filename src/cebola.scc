@@ -121,6 +121,15 @@ var = id | id l_bkt num r_bkt;
 num_real = digito+ pontoevirg digito+;
 
 valor = string | num_real | num_inteiro;
+comando = var atrib exp pontoevirg
+| leia aparentese {var virg} var fparentese pontoevirg
+| escreva aparentese {exp virg} exp fparentese pontoevirg
+| se aparentese exp-logica fparentese entao {comando} comando [senao {comando} comando] fimse pontoevirg
+| avalie aparentese exp fparentese {caso valor doispontos {comando} comando} [senao doispontos {comando} comando] fimavalie pontoevirg
+| enquanto aparentese exp-logica fparentese faca {comando} comando fimenquanto pontoevirg
+| repita {comando} comando ate aparentese exp-logica fparentese pontoevirg
+| para var de num_inteiro ate num_inteiro faca {comando} comando fimpara pontoevirg
+| para var de num_inteiro passo num_inteiro ate num_inteiro faca {comando} comando fimpara pontoevirg
 /*
 programa : 'programa' ID 'inicio' {declaracao} {comando} 'fim.'
 declaracao : tipo ':' {var ','} var ';'
