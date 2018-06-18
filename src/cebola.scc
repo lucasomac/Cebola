@@ -112,14 +112,20 @@ Ignored Tokens
     //coment_bloco;
 
 Productions
-program = programa id inicio declaracao* comando* fimprograma;
+prog = programa id inicio lista_declaracao comando fimprograma;
 
-declaracao = tipo doispontos lista_declaracao* var pontoevirg | const id valor pontoevirg;
-lista_declaracao = var virg;
+lista_declaracao = lista_declaracao var virg | var;
+
+declaracao = tipo doispontos lista_declaracao var pontoevirg | const id valor pontoevirg;
+
+
+
 tipo = real | inteiro | caractere;
-var = id | id l_bkt num r_bkt;
-num_real = digito+ pontoevirg digito+;
 
+var = id | id l_bkt num_inteiro r_bkt;
+
+num_real = digito+ pontoevirg digito+;
+/*
 valor = string | num_real | num_inteiro;
 comando = var atrib exp pontoevirg
 | leia aparentese {var virg} var fparentese pontoevirg
