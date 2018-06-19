@@ -115,26 +115,42 @@ Ignored Tokens
     //coment_bloco;
 
 Productions
-prog = programa id inicio lista_declaracao* comando* fimprograma;
+prog = programa id inicio declaracao*  fimprograma;
 
-lista_declaracao = declaracao+;
+declaracao = tipo doispontos var_vir* var pontoevirg
+            | const id valor pontoevirg;
 var_vir = var virg;
-lista_var = var_vir+;
-
-valor = num_inteiro 
-        | num_real 
-        | string;
-tipo = real | inteiro | caractere | booleano;
 var = id | id l_bkt num_inteiro r_bkt;
+//lista_declaracao = declaracao+;
+//lista_var = var_vir+;
 
-declaracao = tipo doispontos lista_var? var pontoevirg | const id valor pontoevirg;
+valor = num_inteiro | num_real | string;
+tipo = real | inteiro | caractere | booleano;
+/*
+
+exp = expnum | exp_logica;
+
+expnum = termo add expnum | termo;
+
+add = soma | sub;
+
+termo = fator multiplicacao termo | fator;
+
+multiplicacao = mult | div;
+
+fator = aparentese expnum fparentese
+    | sub fator
+    | num_inteiro
+    | num_real
+    | var;
 
 
 /*
 comando = var atrib exp pontoevirg
 | leia aparentese lista_var? var fparentese pontoevirg
 | escreva aparentese lista_exp? exp fparentese pontoevirg
-| se aparentese exp-logica fparentese entao {comando} comando [senao {comando} comando] fimse pontoevirg
+| se aparentese exp-logica fparentese entao comando+ fimse 
+|[senao {comando} comando] fimse pontoevirg
 | avalie aparentese exp fparentese {caso valor doispontos {comando} comando} [senao doispontos {comando} comando] fimavalie pontoevirg
 | enquanto aparentese exp-logica fparentese faca {comando} comando fimenquanto pontoevirg
 | repita {comando} comando ate aparentese exp-logica fparentese pontoevirg
@@ -146,7 +162,7 @@ lista_exp = exp_vir+;
 
 
 exp = valor
-    | esq_parentese exp dir_parentese
+    | aparentese exp fparentese
     | menos exp
     | exp mais exp
     | exp menos exp
@@ -154,56 +170,15 @@ exp = valor
     | exp div exp
     | exp_logica;
     
-	exp_logica= esq_parentese exp_logica esq_parentese
+	exp_logica= aparentese exp_logica fparentese
 			| exp igual exp
 			| exp diferente exp
-			| exp menor_igual exp
-			| exp maior_igual exp
-			| exp menor exp
-			| exp maior exp
+			| exp menorigualq exp
+			| exp maiorigualq exp
+			| exp menorq exp
+			| exp maiorq exp
 			| nao exp_logica
 			| exp_logica e exp_logica
 			| exp_logica ou exp_logica
 			| exp_logica xor exp_logica;
-/*
-programa : 'programa' ID 'inicio' {declaracao} {comando} 'fim.'
-declaracao : tipo ':' {var ','} var ';'
-| 'const' ID valor ';'
-tipo : 'real' | 'inteiro' | 'caractere'
-var : ID | ID '[' N_INT ']'
-valor : STRING | N_INT | N_REAL
-comando : var ':=' exp ';'
-| 'leia' '(' {var ','} var ')' ';'
-| 'escreva' '(' {exp ','} exp ')' ';'
-| 'se' '(' exp-logica ')' 'entao' {comando} comando ['senao' {comando}
-comando] 'fim se' ';'
-| 'avalie' '(' exp ')' {'caso' valor ':' {comando} comando} ['senao' ':'
-{comando} comando] 'fim avalie' ';'
-| 'enquanto' '(' exp-logica ')' 'faca' {comando} comando 'fim enquanto'
-';'
-| 'repita' {comando} comando 'ate' '(' exp-logica ')' ';'
-| 'para' var 'de' N_INT 'ate' N_INT 'faca' {comando} comando
-'fim para' ';'
-| 'para' var 'de' N_INT 'passo' N_INT 'ate' N_INT 'faca' {comando}
-comando 'fim para' ';'
-exp : valor
-| var
-| '(' exp ')'
-| '-' exp
-| exp '+' exp
-| exp '-' exp
-| exp '*' exp
-| exp '/' exp
-| exp-logica
-exp-logica:
-'(' exp-logica ')'
-| exp '=' exp
-| exp '<>' exp
-| exp '<=' exp
-| exp '>=' exp
-| exp '<' exp
-| exp '>' exp
-| 'nao' exp-logica
-| exp-logica 'e' exp-logica
-| exp-logica 'ou' exp-logica
-| exp-logica 'xor' exp-logica */
+*/

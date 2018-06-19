@@ -1,0 +1,297 @@
+Helpers
+tudo = [0..0xffff];
+digito = ['0' .. '9'];
+letra = ['a' .. 'z'] | ['A' .. 'Z'];
+under = '_';
+simbolo = letra | under;
+hcomentario = '/''/' [tudo-10]* (10);
+
+//-------------------------------------------------
+// Expressoes dos Tokens
+//-------------------------------------------------
+
+States
+normal, comentado;
+
+Tokens
+{normal} adicao = '+';
+{normal} subtracao = '-';
+{normal} multiplicacao = '*';
+{normal} divisao = '/';
+
+{normal} caractere = 'caractere';
+{normal} real = 'real';
+{normal} inteiro = 'inteiro';
+{normal} string = '''[tudo-''']*''';
+
+{normal} pontovirgula = ';';
+{normal} doispontos = ':';
+{normal} maiorque = '>';
+{normal} menorque = '<';
+{normal} igual = '=';
+{normal} maiorigual = '>=';
+{normal} menorigual = '<=';
+{normal} diferente = '<>';
+{normal} atribuicao = '<-';
+
+{normal} const = 'const';
+{normal} programa = 'programa';
+{normal} inicio = 'inicio';
+{normal} fimponto = 'fim.';
+{normal} ponto = '.';
+{normal} escreva = 'escreva';
+{normal} leia = 'leia';
+
+{normal} se = 'se';
+{normal} entao = 'entao';
+{normal} senao = 'senao';
+{normal} fimse = 'fim se';
+{normal} aspa = ''';
+{normal} repita = 'repita';
+{normal} enquanto = 'enquanto';
+{normal} fimenquanto = 'fim enquanto';
+{normal} para = 'para';
+{normal} de = 'de';
+{normal} ate = 'ate';
+{normal} faca = 'faca';
+{normal} fimpara = 'fim para';
+{normal} passo = 'passo';
+{normal} avalie = 'avalie';
+{normal} caso = 'caso';
+{normal} fimavalie = 'fim avalie';
+
+{normal} abrecolchete = '[';
+{normal} fecharcolchete = ']';
+
+{normal} e = 'e';
+{normal} ou = 'ou';
+{normal} xor = 'xor';
+{normal} nao = 'nao';
+{normal} virgula = ',';
+{normal} abreparenteses = '(';
+{normal} fechaparenteses = ')';
+{normal} numero = digito+;
+{normal} numero_real = digito+','digito+;
+{normal} identificador = simbolo (simbolo|digito)*;
+
+{normal} comentarioemlinha = hcomentario;
+{normal} lf = 10;
+{normal} espaco = ' '+ | '	'+;
+{normal} cr = 13;
+
+{normal->comentado, comentado} comentado = '/*';
+{comentado} comentadofinal = '*/';
+{comentado} corpo = [tudo -['*' + '/']]*;
+{comentado} estrela = '*';
+{comentado} barra = '/';
+
+Ignored Tokens
+lf,
+espaco,
+comentarioemlinha,
+cr,
+comentado;
+
+//-------------------------------------------------
+// Gramatica da Sintaxe
+//-------------------------------------------------
+
+Productions 
+
+total = programa identificador pontovirgula inicio declaracao_variavel* comando* fimponto { -> New total (identificador, [declaracao_variavel], [comando])};
+
+//declaracao de variaveis e corpo do programa---------------------
+
+declaracao_variavel =  {variavel} tipo doispontos declaracao_variavel_virgula* variaveld pontovirgula { -> New declaracao_variavel.variavel (tipo, [declaracao_variavel_virgula.variaveld], variaveld)}
+					  |{dconstante}const identificador valor pontovirgula { -> New declaracao_variavel.dconstante (identificador, valor)};
+					  
+declaracao_variavel_virgula { -> variaveld } = variaveld virgula { -> variaveld };
+  					  
+variaveld  = {simples} identificador  {-> New variaveld.simples (identificador)}
+	        | {vetor}identificador abrecolchete numero fecharcolchete {-> New variaveld.vetor(identificador,numero)};
+
+tipo  = {caractere} caractere { -> New tipo.caractere (caractere) }
+	    | {inteiro} inteiro { -> New tipo.inteiro (inteiro) }
+	    | {real} real { -> New tipo.real (real) };
+	    
+valor = {string} string { -> New valor.string (string) }
+        |{numero} numero { -> New valor.numero (numero) }
+        |{real} numero_real { -> New valor.real (numero_real) }; 
+
+expr = {numerico} expnum {-> expnum.expr} 
+     | {logica} exp_logica {-> exp_logica.expr};
+
+//expressao numerica----------------------------------------------
+
+expnum {-> expr} = {baixa} expnum soma termo {-> New expr.operacao(expnum.expr, soma.operacao, termo.expr)} 
+		|{termo} termo {-> termo.expr};
+		
+soma {-> operacao}= {add} adicao {-> New operacao.add(adicao)}
+	  |{sub} subtracao {-> New operacao.sub(subtracao)};
+	 
+termo {-> expr} = {alta} termo mult fator {-> New expr.operacao(termo.expr, mult.operacao, fator.expr)} 
+	   			  |{fator} fator {-> fator.expr};
+	  
+mult {-> operacao} = {mult} multiplicacao  {-> New operacao.mult(multiplicacao)}
+	  |{div} divisao {-> New operacao.div(divisao)};
+
+fator {-> expr} =  {interno}abreparenteses expnum fechaparenteses {-> New expr.interno(expnum.expr)}
+				  |{negativo} subtracao fator {-> New expr.negativo(subtracao, fator.expr)}
+				  |{numero} numero {-> New expr.numero(numero)}
+				  |{real} numero_real {-> New expr.real(numero_real)}
+				  |{variavel} var {-> New expr.variavel(var)};
+
+//operacoes logicas-----------------------------------------------
+//pela pesquisa que fizemos 'XOR' tem precedencia entre 'E' e 'OU'
+
+parabool {-> operacaologica} = {menorig} menorigual {-> New operacaologica.menorig (menorigual)}
+		 					 | {maiorig} maiorigual {-> New operacaologica.maiorig (maiorigual)}
+							 | {menor} menorque {-> New operacaologica.menor (menorque)}
+		 					 | {maior} maiorque {-> New operacaologica.maior (maiorque)};
+		 
+lcomp {-> operacaologica} = {igual} igual {-> New operacaologica.igual (igual)} 
+	   					   |{diff} diferente {-> New operacaologica.diff (diferente)};
+	   
+lsoma {-> operacaologica} = ou {-> New operacaologica.ou (ou)};
+lmult {-> operacaologica} = e  {-> New operacaologica.e (e)}; 
+lxor  {-> operacaologica} = xor {-> New operacaologica.xor (xor)};
+
+//Atencao, testes a serem feitos
+exp_logica {-> expr} = {conjunto} naoigualfator lcomp [segundo]: naoigualfator { -> New expr.operacaologica (naoigualfator.expr, lcomp.operacaologica, segundo.expr)}
+		   			 | {direto} linicio { -> linicio.expr};
+		   
+naoigualfator { -> expr } = {parenteses} abreparenteses exp_logica fechaparenteses { -> New expr.interno (exp_logica.expr)}
+			  			  | {exp} expnum parabool [segundo]: expnum { -> New expr.operacaologica (expnum.expr, parabool.operacaologica, segundo.expr)}
+						  | {nao} nao lfator { -> New expr.negado (nao, lfator.expr)};
+
+linicio {-> expr} = {cadeia}linicio lsoma lmeio { -> New expr.operacaologica (linicio.expr, lsoma.operacaologica, lmeio.expr)}
+				  | {simples}lmeio { -> lmeio.expr};
+				  
+lmeio  {-> expr} = {cadeia}lmeio lxor ltermo { -> New expr.operacaologica (lmeio.expr, lxor.operacaologica, ltermo.expr)}
+				 | {simples}ltermo { -> ltermo.expr};
+				 
+ltermo {-> expr} = {cadeia} ltermo lmult lfator { -> New expr.operacaologica (ltermo.expr, lmult.operacaologica, lfator.expr)}
+				 | {simples}lfator { -> lfator.expr };
+				 
+lfator {-> expr} = {parenteses} abreparenteses exp_logica fechaparenteses { -> New expr.interno (exp_logica.expr)}
+				 | {exp} expnum parabool [segundo]: expnum { -> New expr.operacaologica (expnum.expr, parabool.operacaologica, segundo.expr)}
+				 | {expig} expnum lcomp [segundo]: expnum  { -> New expr.operacaologica (expnum.expr, lcomp.operacaologica, segundo.expr)}
+				 | {nao} nao lfator { -> New expr.negado (nao, lfator.expr)};
+
+//comandos----------------------------------------------------
+     
+var = {id} identificador {-> New var.id(identificador)} 
+	| {vetor} identificador abrecolchete expnum fecharcolchete {-> New var.vetor(identificador, expnum.expr)};
+
+comando =  {leia} comando_leia pontovirgula { -> New comando.leia (comando_leia)}
+		 | {repita} comando_repita pontovirgula { -> New comando.repita (comando_repita)}
+		 | {enquanto} comando_enquanto pontovirgula { -> New comando.enquanto (comando_enquanto)}
+		 | {avaliar} comando_avalie pontovirgula { -> New comando.avaliar (comando_avalie)}
+		 | {escrita} comando_escrita pontovirgula { -> New comando.escrita (comando_escrita)}
+		 | {se} comando_se pontovirgula { -> New comando.se (comando_se)} 
+		 | {atribuicao} comando_atribuicao pontovirgula { -> New comando.atribuicao (comando_atribuicao)} 
+		 | {para} comando_para pontovirgula { -> New comando.para (comando_para)};
+		   
+comando_se = {se} se abreparenteses exp_logica fechaparenteses entao comando+ fimse {-> New comando_se.se(exp_logica.expr, [comando])}
+		   | {se_nao} se abreparenteses exp_logica fechaparenteses entao comando+ senao [segundo]:comando+ fimse  {-> New comando_se.se_nao(exp_logica.expr, [comando], [segundo])};		   
+
+comando_repita = repita comando+ ate abreparenteses exp_logica fechaparenteses {-> New comando_repita([comando] ,exp_logica.expr )};
+ 
+comando_enquanto = enquanto abreparenteses exp_logica fechaparenteses faca comando+ fimenquanto {-> New comando_enquanto(exp_logica.expr,[comando])};
+
+casos = caso valor doispontos comando+ {-> New casos(valor,[comando])};
+
+comando_avalie = {normal} avalie abreparenteses expr fechaparenteses casos+ fimavalie {-> New comando_avalie.normal(expr, [casos])}
+     			|{senao}avalie abreparenteses expr fechaparenteses casos+ senao doispontos comando+ fimavalie {-> New comando_avalie.senao(expr, [casos], [comando])};
+
+paratipos = {num}numero {-> New paratipos.num(numero)} 
+		  | {var}var  {-> New paratipos.var(var)};
+comando_para = {sempasso}para var de paratipos ate [segundo]: paratipos faca comando+ fimpara {-> New comando_para.sempasso(var, paratipos, segundo, [comando])}
+			  |{compasso}para var de paratipos passo [segundo]: paratipos ate [terceiro]: paratipos faca comando+ fimpara {-> New comando_para.compasso(var, paratipos, segundo, terceiro, [comando])};	   
+	           
+comando_escrita = {normal}escreva abreparenteses expr fechaparenteses {-> New comando_escrita.normal(expr)} 
+				 |{str}escreva abreparenteses string fechaparenteses {-> New comando_escrita.str(string)};
+	     	 	 
+comando_leia = leia abreparenteses var fechaparenteses {-> New comando_leia(var)};
+comando_atribuicao = var atribuicao expnum  {-> New comando_atribuicao(var,expnum.expr)};
+
+//-------------------------------------------------
+// Arvore de Sintaxe Abstrata
+//-------------------------------------------------
+
+Abstract Syntax Tree
+
+total = identificador declaracao_variavel* comando*;
+
+declaracao_variavel = {variavel} tipo [primeiro]:variaveld* [segundo]:variaveld | {dconstante} identificador valor;
+
+variaveld = {simples} identificador | {vetor} identificador numero;
+
+tipo = {caractere} caractere | {inteiro} inteiro | {real} real;
+
+valor = {string} string | {numero} numero | {real} numero_real;
+
+expr = {operacao} [primeiro]: expr operacao [segundo]: expr	  
+      |{operacaologica} [primeiro]: expr operacaologica [segundo]: expr
+	  |{negativo} subtracao expr
+	  |{negado} nao expr
+	  |{interno} expr
+	  |{numero} numero
+	  |{real} numero_real
+	  |{variavel} var;
+	  
+var = {id} identificador
+	 |{vetor} identificador expr;
+	  
+	  
+operacao = {add} adicao
+	  		|{sub} subtracao
+			|{mult} multiplicacao
+	  		|{div} divisao;
+	  		
+operacaologica = {menorig} menorigual 
+			   | {maiorig} maiorigual 
+			   | {menor} menorque 
+			   | {maior} maiorque 
+			   | {igual} igual 
+			   | {diff} diferente 
+			   | {xor} xor
+			   | {ou} ou 
+			   | {e} e; 
+			   
+			   
+comando_se = {se} expr comando* 
+		   | {se_nao} expr comando* [segundo]:comando+;		   
+
+comando_repita = comando+ expr;
+ 
+comando_enquanto = expr comando*;
+
+casos =  valor comando*;
+
+comando_avalie =   {normal}expr casos*
+				 |  {senao} expr casos* comando*;
+
+paratipos = {num} numero 
+		  | {var} var;
+
+comando_para = {sempasso} var  paratipos [segundo]: paratipos comando+
+		     | {compasso} var  paratipos [segundo]: paratipos [terceiro]: paratipos comando+;	   
+	           
+comando_escrita = {normal} expr
+				| {str} string;
+	     	 	 
+comando_leia = var;
+
+comando_atribuicao = var expr;			   
+			   			   			   			   			 
+			   
+comando =  {leia} comando_leia 
+		 | {repita} comando_repita  
+		 | {enquanto} comando_enquanto 
+		 | {avaliar} comando_avalie  
+		 | {escrita} comando_escrita  
+		 | {se} comando_se  
+		 | {atribuicao} comando_atribuicao  
+		 | {para} comando_para ;	   
+	  		
