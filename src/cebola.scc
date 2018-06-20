@@ -34,23 +34,25 @@ inicio = 'inicio';
 fimprograma= 'fim.';
 
 se = 'se';
+entao = 'entao';
 senao = 'senao';
 fimse = 'fim se';
+
+avalie = 'avalie';
+caso = 'caso';
+fimavalie = 'fim avalie';
 
 enquanto = 'enquanto';
 faca = 'faca';
 fimenquanto = 'fim enquanto';
 
+repita = 'repita';
 para = 'para';
 de = 'de';
+passo = 'passo';
 ate = 'ate';
 fimpara = 'fim para';
-avalie = 'avalie';
-fimavalie = 'fim avalie';
-caso = 'caso';
-repita = 'repita';
 
-passo = 'passo';
 verdadeiro = 'verdadeiro';
 falso = 'falso';
 
@@ -65,25 +67,26 @@ token_specifier = 'T';
 production_specifier = 'P';
 
 /*Operadores aritimeticos*/
-atrib = ':=';
 soma = '+';
 sub = '-';
 mult = '*';
 div = '/';
-mod = '%';
 
-/*Operadores logicos*/
+/*Operadores relacionais*/
 maiorq = '>';
 menorq = '<';
 maiorigualq = '>=';
 menorigualq = '<=';
+igual = '=';
+diferente = '<>';
 
 /*Operadores Booleanos*/
 nao = 'nao';
 e = 'e';
 ou = 'ou';
-igual = '=';
-diferente = '<>';
+
+/*Operador Atribuicao*/
+atrib = ':=';
 
 /*Delimitadores*/
 aparentese = '(';
@@ -102,7 +105,8 @@ fechabloco = '*/' ;
 
 /* Identificadores (letras, numeros) */
 id = (underscore | letra)(letra | digito | underscore)*;
-num_inteiro = digito+;
+numero = digito+;
+num_inteiro = digito+ | '-'digito+;
 num_real = '-'? digito+ ',' digito+;
 string = '''(nao_linha_fim)*''' ;
 
@@ -115,17 +119,15 @@ Ignored Tokens
     //coment_bloco;
 
 Productions
-prog = programa id inicio declaracao*  fimprograma;
 
-declaracao = tipo doispontos var_vir* var pontoevirg
-            | const id valor pontoevirg;
-var_vir = var virg;
-var = id | id l_bkt num_inteiro r_bkt;
-//lista_declaracao = declaracao+;
-//lista_var = var_vir+;
+prog = programa id inicio declaracao* fimprograma;
 
-valor = num_inteiro | num_real | string;
-tipo = real | inteiro | caractere | booleano;
+declaracao = {variavel} tipo doispontos var_vir* var pontoevirg | {constante} const id valor pontoevirg;
+var_vir = {var} var virg;
+var = {simples} id | {vetor} id l_bkt num_inteiro r_bkt;
+
+valor = {inteiro} num_inteiro | {real} num_real | {string} string;
+tipo = {real} real | {inteiro} inteiro | {caractere} caractere | {booleano} booleano;
 /*
 
 exp = expnum | exp_logica;

@@ -5,46 +5,46 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class AProgram extends PProgram
+public final class AInteiroValor extends PValor
 {
-    private TNum _num_;
+    private TNumInteiro _numInteiro_;
 
-    public AProgram()
+    public AInteiroValor()
     {
         // Constructor
     }
 
-    public AProgram(
-        @SuppressWarnings("hiding") TNum _num_)
+    public AInteiroValor(
+        @SuppressWarnings("hiding") TNumInteiro _numInteiro_)
     {
         // Constructor
-        setNum(_num_);
+        setNumInteiro(_numInteiro_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AProgram(
-            cloneNode(this._num_));
+        return new AInteiroValor(
+            cloneNode(this._numInteiro_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAProgram(this);
+        ((Analysis) sw).caseAInteiroValor(this);
     }
 
-    public TNum getNum()
+    public TNumInteiro getNumInteiro()
     {
-        return this._num_;
+        return this._numInteiro_;
     }
 
-    public void setNum(TNum node)
+    public void setNumInteiro(TNumInteiro node)
     {
-        if(this._num_ != null)
+        if(this._numInteiro_ != null)
         {
-            this._num_.parent(null);
+            this._numInteiro_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AProgram extends PProgram
             node.parent(this);
         }
 
-        this._num_ = node;
+        this._numInteiro_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._num_);
+            + toString(this._numInteiro_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._num_ == child)
+        if(this._numInteiro_ == child)
         {
-            this._num_ = null;
+            this._numInteiro_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AProgram extends PProgram
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._num_ == oldChild)
+        if(this._numInteiro_ == oldChild)
         {
-            setNum((TNum) newChild);
+            setNumInteiro((TNumInteiro) newChild);
             return;
         }
 

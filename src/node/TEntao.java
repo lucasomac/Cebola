@@ -5,16 +5,16 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TFimenquanto extends Token
+public final class TEntao extends Token
 {
-    public TFimenquanto()
+    public TEntao()
     {
-        super.setText("fim enquanto");
+        super.setText("entao");
     }
 
-    public TFimenquanto(int line, int pos)
+    public TEntao(int line, int pos)
     {
-        super.setText("fim enquanto");
+        super.setText("entao");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TFimenquanto extends Token
     @Override
     public Object clone()
     {
-      return new TFimenquanto(getLine(), getPos());
+      return new TEntao(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTFimenquanto(this);
+        ((Analysis) sw).caseTEntao(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TFimenquanto text.");
+        throw new RuntimeException("Cannot change TEntao text.");
     }
 }

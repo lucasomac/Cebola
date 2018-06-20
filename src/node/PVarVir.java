@@ -2,7 +2,7 @@
 
 package node;
 
-public abstract class PProgram extends Node
+public abstract class PVarVir extends Node
 {
     // Empty body
 }

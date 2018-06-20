@@ -9,12 +9,12 @@ public final class TFimse extends Token
 {
     public TFimse()
     {
-        super.setText("fimse");
+        super.setText("fim se");
     }
 
     public TFimse(int line, int pos)
     {
-        super.setText("fimse");
+        super.setText("fim se");
         setLine(line);
         setPos(pos);
     }

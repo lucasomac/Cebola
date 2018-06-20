@@ -5,14 +5,14 @@ package node;
 import analysis.*;
 
 @SuppressWarnings("nls")
-public final class TString extends Token
+public final class TNumInteiro extends Token
 {
-    public TString(String text)
+    public TNumInteiro(String text)
     {
         setText(text);
     }
 
-    public TString(String text, int line, int pos)
+    public TNumInteiro(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TString extends Token
     @Override
     public Object clone()
     {
-      return new TString(getText(), getLine(), getPos());
+      return new TNumInteiro(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTString(this);
+        ((Analysis) sw).caseTNumInteiro(this);
     }
 }

@@ -1,8 +1,18 @@
-import lexer.*;
-import node.*;
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PushbackReader;
+import lexer.Lexer;
+import lexer.LexerException;
+import node.EOF;
+import node.Start;
+import node.TAbrebloco;
+import node.TBlank;
+import node.TFechabloco;
+import node.Token;
 import parser.Parser;
 import parser.ParserException;
+
+
 
 public class Cebola {
 
@@ -13,7 +23,8 @@ public class Cebola {
         main.AnaliseLexica(new PushbackReader(new FileReader(args[0]), 1024), lexer, token);
         Parser parser = new Parser(lexer);
         Start tree = parser.parse();
-        tree.toString();
+//        
+//        tree.toString();
         System.out.println();
         System.out.println("Análise sintática bem sucedida !");
     }

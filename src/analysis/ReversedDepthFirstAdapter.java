@@ -32,28 +32,348 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inStart(node);
         node.getEOF().apply(this);
-        node.getPProgram().apply(this);
+        node.getPProg().apply(this);
         outStart(node);
     }
 
-    public void inAProgram(AProgram node)
+    public void inAProg(AProg node)
     {
         defaultIn(node);
     }
 
-    public void outAProgram(AProgram node)
+    public void outAProg(AProg node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAProgram(AProgram node)
+    public void caseAProg(AProg node)
     {
-        inAProgram(node);
-        if(node.getNum() != null)
+        inAProg(node);
+        if(node.getFimprograma() != null)
         {
-            node.getNum().apply(this);
+            node.getFimprograma().apply(this);
         }
-        outAProgram(node);
+        {
+            List<PDeclaracao> copy = new ArrayList<PDeclaracao>(node.getDeclaracao());
+            Collections.reverse(copy);
+            for(PDeclaracao e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getInicio() != null)
+        {
+            node.getInicio().apply(this);
+        }
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        if(node.getPrograma() != null)
+        {
+            node.getPrograma().apply(this);
+        }
+        outAProg(node);
+    }
+
+    public void inAVariavelDeclaracao(AVariavelDeclaracao node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVariavelDeclaracao(AVariavelDeclaracao node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVariavelDeclaracao(AVariavelDeclaracao node)
+    {
+        inAVariavelDeclaracao(node);
+        if(node.getPontoevirg() != null)
+        {
+            node.getPontoevirg().apply(this);
+        }
+        if(node.getVar() != null)
+        {
+            node.getVar().apply(this);
+        }
+        {
+            List<PVarVir> copy = new ArrayList<PVarVir>(node.getVarVir());
+            Collections.reverse(copy);
+            for(PVarVir e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        if(node.getDoispontos() != null)
+        {
+            node.getDoispontos().apply(this);
+        }
+        if(node.getTipo() != null)
+        {
+            node.getTipo().apply(this);
+        }
+        outAVariavelDeclaracao(node);
+    }
+
+    public void inAConstanteDeclaracao(AConstanteDeclaracao node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAConstanteDeclaracao(AConstanteDeclaracao node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAConstanteDeclaracao(AConstanteDeclaracao node)
+    {
+        inAConstanteDeclaracao(node);
+        if(node.getPontoevirg() != null)
+        {
+            node.getPontoevirg().apply(this);
+        }
+        if(node.getValor() != null)
+        {
+            node.getValor().apply(this);
+        }
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        if(node.getConst() != null)
+        {
+            node.getConst().apply(this);
+        }
+        outAConstanteDeclaracao(node);
+    }
+
+    public void inAVarVarVir(AVarVarVir node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVarVarVir(AVarVarVir node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVarVarVir(AVarVarVir node)
+    {
+        inAVarVarVir(node);
+        if(node.getVirg() != null)
+        {
+            node.getVirg().apply(this);
+        }
+        if(node.getVar() != null)
+        {
+            node.getVar().apply(this);
+        }
+        outAVarVarVir(node);
+    }
+
+    public void inASimplesVar(ASimplesVar node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASimplesVar(ASimplesVar node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASimplesVar(ASimplesVar node)
+    {
+        inASimplesVar(node);
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        outASimplesVar(node);
+    }
+
+    public void inAVetorVar(AVetorVar node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAVetorVar(AVetorVar node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAVetorVar(AVetorVar node)
+    {
+        inAVetorVar(node);
+        if(node.getRBkt() != null)
+        {
+            node.getRBkt().apply(this);
+        }
+        if(node.getNumInteiro() != null)
+        {
+            node.getNumInteiro().apply(this);
+        }
+        if(node.getLBkt() != null)
+        {
+            node.getLBkt().apply(this);
+        }
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        outAVetorVar(node);
+    }
+
+    public void inAInteiroValor(AInteiroValor node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAInteiroValor(AInteiroValor node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAInteiroValor(AInteiroValor node)
+    {
+        inAInteiroValor(node);
+        if(node.getNumInteiro() != null)
+        {
+            node.getNumInteiro().apply(this);
+        }
+        outAInteiroValor(node);
+    }
+
+    public void inARealValor(ARealValor node)
+    {
+        defaultIn(node);
+    }
+
+    public void outARealValor(ARealValor node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseARealValor(ARealValor node)
+    {
+        inARealValor(node);
+        if(node.getNumReal() != null)
+        {
+            node.getNumReal().apply(this);
+        }
+        outARealValor(node);
+    }
+
+    public void inAStringValor(AStringValor node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAStringValor(AStringValor node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAStringValor(AStringValor node)
+    {
+        inAStringValor(node);
+        if(node.getString() != null)
+        {
+            node.getString().apply(this);
+        }
+        outAStringValor(node);
+    }
+
+    public void inARealTipo(ARealTipo node)
+    {
+        defaultIn(node);
+    }
+
+    public void outARealTipo(ARealTipo node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseARealTipo(ARealTipo node)
+    {
+        inARealTipo(node);
+        if(node.getReal() != null)
+        {
+            node.getReal().apply(this);
+        }
+        outARealTipo(node);
+    }
+
+    public void inAInteiroTipo(AInteiroTipo node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAInteiroTipo(AInteiroTipo node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAInteiroTipo(AInteiroTipo node)
+    {
+        inAInteiroTipo(node);
+        if(node.getInteiro() != null)
+        {
+            node.getInteiro().apply(this);
+        }
+        outAInteiroTipo(node);
+    }
+
+    public void inACaractereTipo(ACaractereTipo node)
+    {
+        defaultIn(node);
+    }
+
+    public void outACaractereTipo(ACaractereTipo node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseACaractereTipo(ACaractereTipo node)
+    {
+        inACaractereTipo(node);
+        if(node.getCaractere() != null)
+        {
+            node.getCaractere().apply(this);
+        }
+        outACaractereTipo(node);
+    }
+
+    public void inABooleanoTipo(ABooleanoTipo node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABooleanoTipo(ABooleanoTipo node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABooleanoTipo(ABooleanoTipo node)
+    {
+        inABooleanoTipo(node);
+        if(node.getBooleano() != null)
+        {
+            node.getBooleano().apply(this);
+        }
+        outABooleanoTipo(node);
     }
 }

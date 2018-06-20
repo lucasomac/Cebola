@@ -9,12 +9,12 @@ public final class TFimavalie extends Token
 {
     public TFimavalie()
     {
-        super.setText("fimavalie");
+        super.setText("fim avalie");
     }
 
     public TFimavalie(int line, int pos)
     {
-        super.setText("fimavalie");
+        super.setText("fim avalie");
         setLine(line);
         setPos(pos);
     }
