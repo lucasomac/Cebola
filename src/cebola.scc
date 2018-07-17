@@ -67,7 +67,7 @@ token_specifier = 'T';
 production_specifier = 'P';
 
 /*Operadores aritimeticos*/
-soma = '+';
+add = '+';
 sub = '-';
 mult = '*';
 div = '/';
@@ -75,8 +75,8 @@ div = '/';
 /*Operadores relacionais*/
 maiorq = '>';
 menorq = '<';
-maiorigualq = '>=';
-menorigualq = '<=';
+maioriq = '>=';
+menoriq = '<=';
 igual = '=';
 diferente = '<>';
 
@@ -89,8 +89,8 @@ ou = 'ou';
 atrib = ':=';
 
 /*Delimitadores*/
-aparentese = '(';
-fparentese = ')';
+abreparenteses = '(';
+fechaparenteses = ')';
 l_bkt = '[';
 r_bkt = ']';
 virg = ',';
@@ -105,9 +105,9 @@ fechabloco = '*/' ;
 
 /* Identificadores (letras, numeros) */
 id = (underscore | letra)(letra | digito | underscore)*;
-numero = digito+;
-num_inteiro = digito+ | '-'digito+;
-num_real = '-'? digito+ ',' digito+;
+//numero = digito+;
+num_inteiro = digito+;
+num_real = digito+ ',' digito+;
 string = '''(nao_linha_fim)*''' ;
 
 blank = branco+;
@@ -120,67 +120,79 @@ Ignored Tokens
 
 Productions
 
-prog = programa id inicio declaracao* fimprograma;
+cebola = programa id inicio declaracao* comando* fimprograma;
 
 declaracao = {variavel} tipo doispontos var_vir* var pontoevirg | {constante} const id valor pontoevirg;
-var_vir = {var} var virg;
+var_vir = {vars} var virg;
 var = {simples} id | {vetor} id l_bkt num_inteiro r_bkt;
 
 valor = {inteiro} num_inteiro | {real} num_real | {string} string;
 tipo = {real} real | {inteiro} inteiro | {caractere} caractere | {booleano} booleano;
-/*
 
-exp = expnum | exp_logica;
-
-expnum = termo add expnum | termo;
-
-add = soma | sub;
-
-termo = fator multiplicacao termo | fator;
-
-multiplicacao = mult | div;
-
-fator = aparentese expnum fparentese
-    | sub fator
-    | num_inteiro
-    | num_real
-    | var;
+exp = {numerica} exp_num | {logica} exp_logica;
+exp_num = {abaixo} termo soma exp_num | {termo} termo;
+soma = {adicao} add | {subtracao}sub;
+termo = {acima} termo mult fator |{fator} fator;
+mult = {multiplicacao} mult |{divisao} div;
+fator = {precedencia} aparentese expnum fparentese
+    | {negativo}sub fator
+    | {inteiro}num_inteiro
+    | {real}num_real
+    | {variavel}var;
 
 
-/*
-comando = var atrib exp pontoevirg
-| leia aparentese lista_var? var fparentese pontoevirg
-| escreva aparentese lista_exp? exp fparentese pontoevirg
-| se aparentese exp-logica fparentese entao comando+ fimse 
-|[senao {comando} comando] fimse pontoevirg
-| avalie aparentese exp fparentese {caso valor doispontos {comando} comando} [senao doispontos {comando} comando] fimavalie pontoevirg
-| enquanto aparentese exp-logica fparentese faca {comando} comando fimenquanto pontoevirg
-| repita {comando} comando ate aparentese exp-logica fparentese pontoevirg
-| para var de num_inteiro ate num_inteiro faca {comando} comando fimpara pontoevirg
-| para var de num_inteiro passo num_inteiro ate num_inteiro faca {comando} comando fimpara pontoevirg
+boleana  = {menorigual} menoriq
+	| {maiorigual} maioriq 
+	| {menor} menorq 
+	| {maior} maiorq;
+		 
+comparacao  = {igual} igual | {diferente} diferente ;
+	   
+or  = ou ;
+and  = e  ; 
+xor  = xor;
 
-exp_vir = exp virg;
-lista_exp = exp_vir+;
+exp_logica = {conjunto} naofator comparacao nao fator | {direto} linicio;
+
+naoigualfator = {parenteses} abreparenteses exp_logica fechaparenteses 
+		| {exp} expnum boleana expnum 
+		| {nao} nao lfator ;
+
+linicio  = {cadeia}linicio or lmeio 
+	 | {simples}lmeio;
+				  
+lmeio  = {cadeia}lmeio lxor ltermo 
+	| {simples}ltermo ;
+				 
+ltermo  = {cadeia} ltermo and lfator 
+	| {simples}lfator;
+
+lfator  = {parenteses} abreparenteses exp_logica fechaparenteses
+	 | {exp} expnum booleana expnum 
+	 | {expig} expnum comparacao expnum  
+	 | {nao} nao lfator ;
+
+comando =  {leia} comando_leia pontovirgula 
+		 | {repita} comando_repita pontoevirg 
+		 | {enquanto} comando_enquanto pontoevirg 
+		 | {avaliar} comando_avalie pontoevirg 
+		 | {escrita} comando_escrita pontoevirg 
+		 | {se} comando_se pontoevirg
+		 | {atribuicao} comando_atribuicao pontoevirg  
+		 | {para} comando_para pontoevirg ;
 
 
-exp = valor
-    | aparentese exp fparentese
-    | menos exp
-    | exp mais exp
-    | exp menos exp
-    | exp mult exp
-    | exp div exp
-    | exp_logica;
-    
-	exp_logica= aparentese exp_logica fparentese
-			| exp igual exp
-			| exp diferente exp
-			| exp menorigualq exp
-			| exp maiorigualq exp
-			| exp menorq exp
-			| exp maiorq exp
-			| nao exp_logica
-			| exp_logica e exp_logica
-			| exp_logica ou exp_logica
-			| exp_logica xor exp_logica;
-*/
+comando_se = {se} se abreparenteses exp_logica fechaparenteses entao comando+ fimse 
+		   | {se_nao} se abreparenteses exp_logica fechaparenteses entao comando+ senao comando+ fimse;		   
+
+comando_repita = repita comando+ ate abreparenteses exp_logica fechaparenteses ;
+ 
+comando_enquanto = enquanto abreparenteses exp_logica fechaparenteses faca comando+ fimenquanto;
+
+casos = caso valor doispontos comando+;
+
+comando_avalie = {normal} avalie abreparenteses expr fechaparenteses casos+ fimavalie
+     			|{senao}avalie abreparenteses expr fechaparenteses casos+ senao doispontos comando+ fimavalie ;
+
+paratipos = {num}numero 
+		  | {var}var  {-> New paratipos.var(var)};
