@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class ARealValor extends PValor
 {
-    private TNumReal _numReal_;
+    private TNumeroReal _numeroReal_;
 
     public ARealValor()
     {
@@ -15,10 +15,10 @@ public final class ARealValor extends PValor
     }
 
     public ARealValor(
-        @SuppressWarnings("hiding") TNumReal _numReal_)
+        @SuppressWarnings("hiding") TNumeroReal _numeroReal_)
     {
         // Constructor
-        setNumReal(_numReal_);
+        setNumeroReal(_numeroReal_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ARealValor extends PValor
     public Object clone()
     {
         return new ARealValor(
-            cloneNode(this._numReal_));
+            cloneNode(this._numeroReal_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ARealValor extends PValor
         ((Analysis) sw).caseARealValor(this);
     }
 
-    public TNumReal getNumReal()
+    public TNumeroReal getNumeroReal()
     {
-        return this._numReal_;
+        return this._numeroReal_;
     }
 
-    public void setNumReal(TNumReal node)
+    public void setNumeroReal(TNumeroReal node)
     {
-        if(this._numReal_ != null)
+        if(this._numeroReal_ != null)
         {
-            this._numReal_.parent(null);
+            this._numeroReal_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ARealValor extends PValor
             node.parent(this);
         }
 
-        this._numReal_ = node;
+        this._numeroReal_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._numReal_);
+            + toString(this._numeroReal_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._numReal_ == child)
+        if(this._numeroReal_ == child)
         {
-            this._numReal_ = null;
+            this._numeroReal_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ARealValor extends PValor
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._numReal_ == oldChild)
+        if(this._numeroReal_ == oldChild)
         {
-            setNumReal((TNumReal) newChild);
+            setNumeroReal((TNumeroReal) newChild);
             return;
         }
 

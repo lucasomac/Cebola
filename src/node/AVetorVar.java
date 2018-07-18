@@ -7,10 +7,8 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AVetorVar extends PVar
 {
-    private TId _id_;
-    private TLBkt _lBkt_;
-    private TNumInteiro _numInteiro_;
-    private TRBkt _rBkt_;
+    private TIdentificador _identificador_;
+    private PExpr _expr_;
 
     public AVetorVar()
     {
@@ -18,19 +16,13 @@ public final class AVetorVar extends PVar
     }
 
     public AVetorVar(
-        @SuppressWarnings("hiding") TId _id_,
-        @SuppressWarnings("hiding") TLBkt _lBkt_,
-        @SuppressWarnings("hiding") TNumInteiro _numInteiro_,
-        @SuppressWarnings("hiding") TRBkt _rBkt_)
+        @SuppressWarnings("hiding") TIdentificador _identificador_,
+        @SuppressWarnings("hiding") PExpr _expr_)
     {
         // Constructor
-        setId(_id_);
+        setIdentificador(_identificador_);
 
-        setLBkt(_lBkt_);
-
-        setNumInteiro(_numInteiro_);
-
-        setRBkt(_rBkt_);
+        setExpr(_expr_);
 
     }
 
@@ -38,10 +30,8 @@ public final class AVetorVar extends PVar
     public Object clone()
     {
         return new AVetorVar(
-            cloneNode(this._id_),
-            cloneNode(this._lBkt_),
-            cloneNode(this._numInteiro_),
-            cloneNode(this._rBkt_));
+            cloneNode(this._identificador_),
+            cloneNode(this._expr_));
     }
 
     @Override
@@ -50,16 +40,16 @@ public final class AVetorVar extends PVar
         ((Analysis) sw).caseAVetorVar(this);
     }
 
-    public TId getId()
+    public TIdentificador getIdentificador()
     {
-        return this._id_;
+        return this._identificador_;
     }
 
-    public void setId(TId node)
+    public void setIdentificador(TIdentificador node)
     {
-        if(this._id_ != null)
+        if(this._identificador_ != null)
         {
-            this._id_.parent(null);
+            this._identificador_.parent(null);
         }
 
         if(node != null)
@@ -72,19 +62,19 @@ public final class AVetorVar extends PVar
             node.parent(this);
         }
 
-        this._id_ = node;
+        this._identificador_ = node;
     }
 
-    public TLBkt getLBkt()
+    public PExpr getExpr()
     {
-        return this._lBkt_;
+        return this._expr_;
     }
 
-    public void setLBkt(TLBkt node)
+    public void setExpr(PExpr node)
     {
-        if(this._lBkt_ != null)
+        if(this._expr_ != null)
         {
-            this._lBkt_.parent(null);
+            this._expr_.parent(null);
         }
 
         if(node != null)
@@ -97,94 +87,30 @@ public final class AVetorVar extends PVar
             node.parent(this);
         }
 
-        this._lBkt_ = node;
-    }
-
-    public TNumInteiro getNumInteiro()
-    {
-        return this._numInteiro_;
-    }
-
-    public void setNumInteiro(TNumInteiro node)
-    {
-        if(this._numInteiro_ != null)
-        {
-            this._numInteiro_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._numInteiro_ = node;
-    }
-
-    public TRBkt getRBkt()
-    {
-        return this._rBkt_;
-    }
-
-    public void setRBkt(TRBkt node)
-    {
-        if(this._rBkt_ != null)
-        {
-            this._rBkt_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._rBkt_ = node;
+        this._expr_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._id_)
-            + toString(this._lBkt_)
-            + toString(this._numInteiro_)
-            + toString(this._rBkt_);
+            + toString(this._identificador_)
+            + toString(this._expr_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._id_ == child)
+        if(this._identificador_ == child)
         {
-            this._id_ = null;
+            this._identificador_ = null;
             return;
         }
 
-        if(this._lBkt_ == child)
+        if(this._expr_ == child)
         {
-            this._lBkt_ = null;
-            return;
-        }
-
-        if(this._numInteiro_ == child)
-        {
-            this._numInteiro_ = null;
-            return;
-        }
-
-        if(this._rBkt_ == child)
-        {
-            this._rBkt_ = null;
+            this._expr_ = null;
             return;
         }
 
@@ -195,27 +121,15 @@ public final class AVetorVar extends PVar
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._id_ == oldChild)
+        if(this._identificador_ == oldChild)
         {
-            setId((TId) newChild);
+            setIdentificador((TIdentificador) newChild);
             return;
         }
 
-        if(this._lBkt_ == oldChild)
+        if(this._expr_ == oldChild)
         {
-            setLBkt((TLBkt) newChild);
-            return;
-        }
-
-        if(this._numInteiro_ == oldChild)
-        {
-            setNumInteiro((TNumInteiro) newChild);
-            return;
-        }
-
-        if(this._rBkt_ == oldChild)
-        {
-            setRBkt((TRBkt) newChild);
+            setExpr((PExpr) newChild);
             return;
         }
 

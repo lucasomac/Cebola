@@ -5,9 +5,6 @@ import lexer.Lexer;
 import lexer.LexerException;
 import node.EOF;
 import node.Start;
-import node.TAbrebloco;
-import node.TBlank;
-import node.TFechabloco;
 import node.Token;
 import parser.Parser;
 import parser.ParserException;
@@ -36,7 +33,7 @@ public class Cebola {
         try {
             while (!((token = lexer.next()) instanceof EOF)) {
                 if (token instanceof TAbrebloco) {
-                    Aninhado ninho = new Aninhado(in, lexer, token);
+                    Aninhado_old ninho = new Aninhado_old(in, lexer, token);
                     ninho.filter();
 //                    token = ninho.getToken();
 //                    lexer = ninho.getLexer();
