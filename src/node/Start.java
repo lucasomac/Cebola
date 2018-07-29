@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class Start extends Node
 {
-    private PCebola _pCebola_;
+    private PTotal _pTotal_;
     private EOF _eof_;
 
     public Start()
@@ -16,10 +16,10 @@ public final class Start extends Node
     }
 
     public Start(
-        @SuppressWarnings("hiding") PCebola _pCebola_,
+        @SuppressWarnings("hiding") PTotal _pTotal_,
         @SuppressWarnings("hiding") EOF _eof_)
     {
-        setPCebola(_pCebola_);
+        setPTotal(_pTotal_);
         setEOF(_eof_);
     }
 
@@ -27,7 +27,7 @@ public final class Start extends Node
     public Object clone()
     {
         return new Start(
-            cloneNode(this._pCebola_),
+            cloneNode(this._pTotal_),
             cloneNode(this._eof_));
     }
 
@@ -37,16 +37,16 @@ public final class Start extends Node
         ((Analysis) sw).caseStart(this);
     }
 
-    public PCebola getPCebola()
+    public PTotal getPTotal()
     {
-        return this._pCebola_;
+        return this._pTotal_;
     }
 
-    public void setPCebola(PCebola node)
+    public void setPTotal(PTotal node)
     {
-        if(this._pCebola_ != null)
+        if(this._pTotal_ != null)
         {
-            this._pCebola_.parent(null);
+            this._pTotal_.parent(null);
         }
 
         if(node != null)
@@ -59,7 +59,7 @@ public final class Start extends Node
             node.parent(this);
         }
 
-        this._pCebola_ = node;
+        this._pTotal_ = node;
     }
 
     public EOF getEOF()
@@ -90,9 +90,9 @@ public final class Start extends Node
     @Override
     void removeChild(Node child)
     {
-        if(this._pCebola_ == child)
+        if(this._pTotal_ == child)
         {
-            this._pCebola_ = null;
+            this._pTotal_ = null;
             return;
         }
 
@@ -108,9 +108,9 @@ public final class Start extends Node
     @Override
     void replaceChild(Node oldChild, Node newChild)
     {
-        if(this._pCebola_ == oldChild)
+        if(this._pTotal_ == oldChild)
         {
-            setPCebola((PCebola) newChild);
+            setPTotal((PTotal) newChild);
             return;
         }
 
@@ -127,7 +127,7 @@ public final class Start extends Node
     public String toString()
     {
         return "" +
-            toString(this._pCebola_) +
+            toString(this._pTotal_) +
             toString(this._eof_);
     }
 }

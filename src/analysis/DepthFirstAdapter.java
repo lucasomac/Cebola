@@ -31,25 +31,25 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseStart(Start node)
     {
         inStart(node);
-        node.getPCebola().apply(this);
+        node.getPTotal().apply(this);
         node.getEOF().apply(this);
         outStart(node);
     }
 
-    public void inACebola(ACebola node)
+    public void inATotal(ATotal node)
     {
         defaultIn(node);
     }
 
-    public void outACebola(ACebola node)
+    public void outATotal(ATotal node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseACebola(ACebola node)
+    public void caseATotal(ATotal node)
     {
-        inACebola(node);
+        inATotal(node);
         if(node.getIdentificador() != null)
         {
             node.getIdentificador().apply(this);
@@ -68,7 +68,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
                 e.apply(this);
             }
         }
-        outACebola(node);
+        outATotal(node);
     }
 
     public void inAVariavelDeclaracaoVariavel(AVariavelDeclaracaoVariavel node)
