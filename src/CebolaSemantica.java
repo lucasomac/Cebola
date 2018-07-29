@@ -4,7 +4,7 @@ import node.*;
 import java.io.*;
 
 
-public class MainSemantico {
+public class CebolaSemantica {
 
     public static void main(String[] args) {
         if (args.length > 0) {

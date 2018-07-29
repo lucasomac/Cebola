@@ -5,7 +5,7 @@ import java.io.PushbackReader;
 import lexer.LexerException;
 import node.Token;
 
-public class MainLexico {
+public class CebolaLexica {
 
     public static void main(String[] args) {
         if (args.length > 0) {

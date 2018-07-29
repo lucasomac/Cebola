@@ -4,7 +4,7 @@ import node.*;
 import java.io.*;
 
 
-public class Main {
+public class Cebola {
 
     public static void main(String[] args) {
         if (args.length > 0) {
