@@ -41,14 +41,14 @@ public class Semantico extends DepthFirstAdapter {
     }
 
     @Override
-    public void outATotal(ATotal node) {
+    public void outACebola(ACebola node) {
         // TODO Auto-generated method stub
         String nomePrograma = node.getIdentificador().getText();
         if (tabelaSimbolos.containsKey(nomePrograma)) {
             System.err.println("Erro semantico: O nome do programa nao pode ser usado como variavel [" + Integer.toString(node.getIdentificador().getLine())
                     + "," + Integer.toString(node.getIdentificador().getPos()) + "]");
         }
-        super.outATotal(node);
+        super.outACebola(node);
     }
 
     @Override

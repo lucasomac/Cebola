@@ -173,7 +173,7 @@ public class Parser
                 case ACCEPT:
                     {
                         EOF node2 = (EOF) this.lexer.next();
-                        PTotal node1 = (PTotal) pop().get(0);
+                        PCebola node1 = (PCebola) pop().get(0);
                         Start node = new Start(node1, node2);
                         return node;
                     }
@@ -189,25 +189,25 @@ public class Parser
     {
         switch(reduction)
         {
-            case 0: /* reduce AAtotal1Total */
+            case 0: /* reduce AAcebola1Cebola */
             {
                 ArrayList<Object> list = new0();
                 push(goTo(0), list);
             }
             break;
-            case 1: /* reduce AAtotal2Total */
+            case 1: /* reduce AAcebola2Cebola */
             {
                 ArrayList<Object> list = new1();
                 push(goTo(0), list);
             }
             break;
-            case 2: /* reduce AAtotal3Total */
+            case 2: /* reduce AAcebola3Cebola */
             {
                 ArrayList<Object> list = new2();
                 push(goTo(0), list);
             }
             break;
-            case 3: /* reduce AAtotal4Total */
+            case 3: /* reduce AAcebola4Cebola */
             {
                 ArrayList<Object> list = new3();
                 push(goTo(0), list);
@@ -723,7 +723,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new0() /* reduce AAtotal1Total */
+    ArrayList<Object> new0() /* reduce AAcebola1Cebola */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -732,7 +732,7 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PTotal ptotalNode1;
+        PCebola pcebolaNode1;
         {
             // Block
         TIdentificador tidentificadorNode2;
@@ -746,16 +746,16 @@ public class Parser
             // Block
         }
 
-        ptotalNode1 = new ATotal(tidentificadorNode2, listNode3, listNode4);
+        pcebolaNode1 = new ACebola(tidentificadorNode2, listNode3, listNode4);
         }
-	nodeList.add(ptotalNode1);
+	nodeList.add(pcebolaNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new1() /* reduce AAtotal2Total */
+    ArrayList<Object> new1() /* reduce AAcebola2Cebola */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -765,7 +765,7 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PTotal ptotalNode1;
+        PCebola pcebolaNode1;
         {
             // Block
         TIdentificador tidentificadorNode2;
@@ -785,16 +785,16 @@ public class Parser
             // Block
         }
 
-        ptotalNode1 = new ATotal(tidentificadorNode2, listNode4, listNode5);
+        pcebolaNode1 = new ACebola(tidentificadorNode2, listNode4, listNode5);
         }
-	nodeList.add(ptotalNode1);
+	nodeList.add(pcebolaNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new2() /* reduce AAtotal3Total */
+    ArrayList<Object> new2() /* reduce AAcebola3Cebola */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -804,7 +804,7 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PTotal ptotalNode1;
+        PCebola pcebolaNode1;
         {
             // Block
         TIdentificador tidentificadorNode2;
@@ -824,16 +824,16 @@ public class Parser
 	}
         }
 
-        ptotalNode1 = new ATotal(tidentificadorNode2, listNode3, listNode5);
+        pcebolaNode1 = new ACebola(tidentificadorNode2, listNode3, listNode5);
         }
-	nodeList.add(ptotalNode1);
+	nodeList.add(pcebolaNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new3() /* reduce AAtotal4Total */
+    ArrayList<Object> new3() /* reduce AAcebola4Cebola */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -844,7 +844,7 @@ public class Parser
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PTotal ptotalNode1;
+        PCebola pcebolaNode1;
         {
             // Block
         TIdentificador tidentificadorNode2;
@@ -870,9 +870,9 @@ public class Parser
 	}
         }
 
-        ptotalNode1 = new ATotal(tidentificadorNode2, listNode4, listNode6);
+        pcebolaNode1 = new ACebola(tidentificadorNode2, listNode4, listNode6);
         }
-	nodeList.add(ptotalNode1);
+	nodeList.add(pcebolaNode1);
         return nodeList;
     }
 

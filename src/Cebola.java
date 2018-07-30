@@ -1,8 +1,8 @@
+
 import lexer.*;
 import node.*;
 
 import java.io.*;
-
 
 public class Cebola {
 
@@ -20,36 +20,36 @@ public class Cebola {
                 MeuParser parser = new MeuParser(lexer);
                 boolean erroSintatico = false;
 
-                try {
-                    Start ast = parser.parse();
-                    ast.toString();
-                    if (!erroSintatico) {
-                        System.out.println("Codigo sint�ticamente correto!");
-                        Semantico semantica = new Semantico();
-                        ast.apply(semantica);
-                    }
-                } catch (LexerException e) {
-                    erroSintatico = true;
-                    int a, b, c, d;
-                    String x, y, z;
-                    a = e.getMessage().indexOf(":");
-                    b = e.getMessage().indexOf("[");
-                    c = e.getMessage().indexOf(",");
-                    d = e.getMessage().indexOf("]");
-                    x = e.getMessage().substring(a + 1, a + 3);
-                    y = Integer.toString(Integer.parseInt(e.getMessage().substring(b + 1, c)) - lexer.desvio);
-                    z = Integer.toString(Integer.parseInt(e.getMessage().substring(c + 1, d)));
-                    System.err.println("Erro lexico token deconhecido " + "[" + y + "," + z + "]:" + x);
-                } catch (Exception e) {
-                    if (!erroSintatico) {
+                while (true) {
+                    try {
+                        if ("".equals(lexer.next().getText())) {
+                            break;
+                        }
+                        Start ast = parser.parse();
+                        if (!erroSintatico) {
+                            System.out.println("Codigo sintaticamente correto!");
+                        }
+                    } catch (LexerException e) {
                         erroSintatico = true;
-                        System.err.println("Erro sintatico!:" + e.getMessage());
+                        int a, b, c, d;
+                        String x, y, z;
+                        a = e.getMessage().indexOf(":");
+                        b = e.getMessage().indexOf("[");
+                        c = e.getMessage().indexOf(",");
+                        d = e.getMessage().indexOf("]");
+                        x = e.getMessage().substring(a + 1, a + 3);
+                        y = Integer.toString(Integer.parseInt(e.getMessage().substring(b + 1, c)) - lexer.desvio);
+                        z = Integer.toString(Integer.parseInt(e.getMessage().substring(c + 1, d)));
+                        System.err.println("Erro lexico token deconhecido " + "[" + y + "," + z + "]:" + x);
+                    } catch (Exception e) {
+                        if (!erroSintatico) {
+                            erroSintatico = true;
+                            System.err.println("Erro sinttico!:" + e.getMessage());
+                        }
                     }
                 }
             } catch (Exception e) {
-
                 System.out.println(e);
-
             }
         } else {
             System.err.println("Nenhum arquivo foi dado como entrada");

@@ -12,7 +12,7 @@ public interface Analysis extends Switch
     void setOut(Node node, Object o);
 
     void caseStart(Start node);
-    void caseATotal(ATotal node);
+    void caseACebola(ACebola node);
     void caseAVariavelDeclaracaoVariavel(AVariavelDeclaracaoVariavel node);
     void caseADconstanteDeclaracaoVariavel(ADconstanteDeclaracaoVariavel node);
     void caseASimplesVariaveld(ASimplesVariaveld node);

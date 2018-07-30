@@ -32,24 +32,24 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     {
         inStart(node);
         node.getEOF().apply(this);
-        node.getPTotal().apply(this);
+        node.getPCebola().apply(this);
         outStart(node);
     }
 
-    public void inATotal(ATotal node)
+    public void inACebola(ACebola node)
     {
         defaultIn(node);
     }
 
-    public void outATotal(ATotal node)
+    public void outACebola(ACebola node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATotal(ATotal node)
+    public void caseACebola(ACebola node)
     {
-        inATotal(node);
+        inACebola(node);
         {
             List<PComando> copy = new ArrayList<PComando>(node.getComando());
             Collections.reverse(copy);
@@ -70,7 +70,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getIdentificador().apply(this);
         }
-        outATotal(node);
+        outACebola(node);
     }
 
     public void inAVariavelDeclaracaoVariavel(AVariavelDeclaracaoVariavel node)

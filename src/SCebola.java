@@ -4,11 +4,11 @@ import analysis.*;
 import java.util.LinkedList;
 import java.util.HashMap;
 
-public class STotal extends AnalysisAdapter {
+public class SCebola extends AnalysisAdapter {
 
     HashMap<String, Simbolo> tabelaSimbolos;
 
-    public STotal() {
+    public SCebola() {
         tabelaSimbolos = new HashMap<String, Simbolo>();
     }
 
@@ -20,11 +20,11 @@ public class STotal extends AnalysisAdapter {
 
     @Override
     public void caseStart(Start no) {
-        caseATotal((ATotal) no.getPTotal());
+        caseACebola((ACebola) no.getPCebola());
     }
 
     @Override
-    public void caseATotal(ATotal node) {
+    public void caseACebola(ACebola node) {
         String nomePrograma = node.getIdentificador().getText();
         LinkedList<PDeclaracaoVariavel> listaDeclaracoes = node.getDeclaracaoVariavel();
         LinkedList<PComando> listaComandos = node.getComando();

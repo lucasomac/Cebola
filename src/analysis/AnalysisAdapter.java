@@ -75,7 +75,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATotal(ATotal node)
+    public void caseACebola(ACebola node)
     {
         defaultCase(node);
     }
