@@ -10,19 +10,19 @@ class TokenIndex extends AnalysisAdapter
     int index;
 
     @Override
-    public void caseTAdicao(@SuppressWarnings("unused") TAdicao node)
+    public void caseTMais(@SuppressWarnings("unused") TMais node)
     {
         this.index = 0;
     }
 
     @Override
-    public void caseTSubtracao(@SuppressWarnings("unused") TSubtracao node)
+    public void caseTMenos(@SuppressWarnings("unused") TMenos node)
     {
         this.index = 1;
     }
 
     @Override
-    public void caseTMultiplicacao(@SuppressWarnings("unused") TMultiplicacao node)
+    public void caseTVezes(@SuppressWarnings("unused") TVezes node)
     {
         this.index = 2;
     }
@@ -58,43 +58,43 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTPontovirgula(@SuppressWarnings("unused") TPontovirgula node)
+    public void caseTPtvirg(@SuppressWarnings("unused") TPtvirg node)
     {
         this.index = 8;
     }
 
     @Override
-    public void caseTDoispontos(@SuppressWarnings("unused") TDoispontos node)
+    public void caseTDoispt(@SuppressWarnings("unused") TDoispt node)
     {
         this.index = 9;
     }
 
     @Override
-    public void caseTVirgula(@SuppressWarnings("unused") TVirgula node)
+    public void caseTVirg(@SuppressWarnings("unused") TVirg node)
     {
         this.index = 10;
     }
 
     @Override
-    public void caseTAbreparenteses(@SuppressWarnings("unused") TAbreparenteses node)
+    public void caseTApar(@SuppressWarnings("unused") TApar node)
     {
         this.index = 11;
     }
 
     @Override
-    public void caseTFechaparenteses(@SuppressWarnings("unused") TFechaparenteses node)
+    public void caseTFpar(@SuppressWarnings("unused") TFpar node)
     {
         this.index = 12;
     }
 
     @Override
-    public void caseTAbrecolchete(@SuppressWarnings("unused") TAbrecolchete node)
+    public void caseTAcol(@SuppressWarnings("unused") TAcol node)
     {
         this.index = 13;
     }
 
     @Override
-    public void caseTFecharcolchete(@SuppressWarnings("unused") TFecharcolchete node)
+    public void caseTFcol(@SuppressWarnings("unused") TFcol node)
     {
         this.index = 14;
     }
@@ -106,13 +106,13 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTMaiorque(@SuppressWarnings("unused") TMaiorque node)
+    public void caseTMaiorq(@SuppressWarnings("unused") TMaiorq node)
     {
         this.index = 16;
     }
 
     @Override
-    public void caseTMenorque(@SuppressWarnings("unused") TMenorque node)
+    public void caseTMenorq(@SuppressWarnings("unused") TMenorq node)
     {
         this.index = 17;
     }
@@ -160,7 +160,7 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTFimponto(@SuppressWarnings("unused") TFimponto node)
+    public void caseTFim(@SuppressWarnings("unused") TFim node)
     {
         this.index = 25;
     }

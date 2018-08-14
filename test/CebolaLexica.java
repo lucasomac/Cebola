@@ -38,9 +38,9 @@ public class CebolaLexica {
                     }
                 }
                 if (!lexer.houveProblema) {
-                    System.out.println("\nCodigo pertence a linguagem!!");
+                    System.out.println("\nCódigo pertence a linguagem!!");
                 } else {
-                    System.err.println("\n!!O executavel nao foi gerado pois houve erros de compilacao!!");
+                    System.err.println("\n**Executável não gerado. Erros de Compilação encontradors!!");
                 }
 
             } catch (Exception e) {

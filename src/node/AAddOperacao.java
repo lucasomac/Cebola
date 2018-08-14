@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AAddOperacao extends POperacao
 {
-    private TAdicao _adicao_;
+    private TMais _mais_;
 
     public AAddOperacao()
     {
@@ -15,10 +15,10 @@ public final class AAddOperacao extends POperacao
     }
 
     public AAddOperacao(
-        @SuppressWarnings("hiding") TAdicao _adicao_)
+        @SuppressWarnings("hiding") TMais _mais_)
     {
         // Constructor
-        setAdicao(_adicao_);
+        setMais(_mais_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AAddOperacao extends POperacao
     public Object clone()
     {
         return new AAddOperacao(
-            cloneNode(this._adicao_));
+            cloneNode(this._mais_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AAddOperacao extends POperacao
         ((Analysis) sw).caseAAddOperacao(this);
     }
 
-    public TAdicao getAdicao()
+    public TMais getMais()
     {
-        return this._adicao_;
+        return this._mais_;
     }
 
-    public void setAdicao(TAdicao node)
+    public void setMais(TMais node)
     {
-        if(this._adicao_ != null)
+        if(this._mais_ != null)
         {
-            this._adicao_.parent(null);
+            this._mais_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AAddOperacao extends POperacao
             node.parent(this);
         }
 
-        this._adicao_ = node;
+        this._mais_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._adicao_);
+            + toString(this._mais_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._adicao_ == child)
+        if(this._mais_ == child)
         {
-            this._adicao_ = null;
+            this._mais_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AAddOperacao extends POperacao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._adicao_ == oldChild)
+        if(this._mais_ == oldChild)
         {
-            setAdicao((TAdicao) newChild);
+            setMais((TMais) newChild);
             return;
         }
 

@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AMaiorOperacaologica extends POperacaologica
 {
-    private TMaiorque _maiorque_;
+    private TMaiorq _maiorq_;
 
     public AMaiorOperacaologica()
     {
@@ -15,10 +15,10 @@ public final class AMaiorOperacaologica extends POperacaologica
     }
 
     public AMaiorOperacaologica(
-        @SuppressWarnings("hiding") TMaiorque _maiorque_)
+        @SuppressWarnings("hiding") TMaiorq _maiorq_)
     {
         // Constructor
-        setMaiorque(_maiorque_);
+        setMaiorq(_maiorq_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AMaiorOperacaologica extends POperacaologica
     public Object clone()
     {
         return new AMaiorOperacaologica(
-            cloneNode(this._maiorque_));
+            cloneNode(this._maiorq_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AMaiorOperacaologica extends POperacaologica
         ((Analysis) sw).caseAMaiorOperacaologica(this);
     }
 
-    public TMaiorque getMaiorque()
+    public TMaiorq getMaiorq()
     {
-        return this._maiorque_;
+        return this._maiorq_;
     }
 
-    public void setMaiorque(TMaiorque node)
+    public void setMaiorq(TMaiorq node)
     {
-        if(this._maiorque_ != null)
+        if(this._maiorq_ != null)
         {
-            this._maiorque_.parent(null);
+            this._maiorq_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMaiorOperacaologica extends POperacaologica
             node.parent(this);
         }
 
-        this._maiorque_ = node;
+        this._maiorq_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._maiorque_);
+            + toString(this._maiorq_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._maiorque_ == child)
+        if(this._maiorq_ == child)
         {
-            this._maiorque_ = null;
+            this._maiorq_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMaiorOperacaologica extends POperacaologica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._maiorque_ == oldChild)
+        if(this._maiorq_ == oldChild)
         {
-            setMaiorque((TMaiorque) newChild);
+            setMaiorq((TMaiorq) newChild);
             return;
         }
 

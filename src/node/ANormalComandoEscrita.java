@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class ANormalComandoEscrita extends PComandoEscrita
 {
-    private PExpr _expr_;
+    private PExp _exp_;
 
     public ANormalComandoEscrita()
     {
@@ -15,10 +15,10 @@ public final class ANormalComandoEscrita extends PComandoEscrita
     }
 
     public ANormalComandoEscrita(
-        @SuppressWarnings("hiding") PExpr _expr_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
-        setExpr(_expr_);
+        setExp(_exp_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ANormalComandoEscrita extends PComandoEscrita
     public Object clone()
     {
         return new ANormalComandoEscrita(
-            cloneNode(this._expr_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ANormalComandoEscrita extends PComandoEscrita
         ((Analysis) sw).caseANormalComandoEscrita(this);
     }
 
-    public PExpr getExpr()
+    public PExp getExp()
     {
-        return this._expr_;
+        return this._exp_;
     }
 
-    public void setExpr(PExpr node)
+    public void setExp(PExp node)
     {
-        if(this._expr_ != null)
+        if(this._exp_ != null)
         {
-            this._expr_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ANormalComandoEscrita extends PComandoEscrita
             node.parent(this);
         }
 
-        this._expr_ = node;
+        this._exp_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._expr_);
+            + toString(this._exp_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._expr_ == child)
+        if(this._exp_ == child)
         {
-            this._expr_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ANormalComandoEscrita extends PComandoEscrita
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._expr_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpr((PExpr) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

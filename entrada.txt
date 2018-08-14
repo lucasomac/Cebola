@@ -5,7 +5,7 @@
 	Alunos:  Lucas de Oliveira Macedo
 */
 
-programa ProgramaDeTeste;
+programa CebolaTeste;
 inicio
 	const Desenvolvedor1 'Breno Cruz';
 	const Desenvolvedor2 'Claudio Mota';

@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AMenorOperacaologica extends POperacaologica
 {
-    private TMenorque _menorque_;
+    private TMenorq _menorq_;
 
     public AMenorOperacaologica()
     {
@@ -15,10 +15,10 @@ public final class AMenorOperacaologica extends POperacaologica
     }
 
     public AMenorOperacaologica(
-        @SuppressWarnings("hiding") TMenorque _menorque_)
+        @SuppressWarnings("hiding") TMenorq _menorq_)
     {
         // Constructor
-        setMenorque(_menorque_);
+        setMenorq(_menorq_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AMenorOperacaologica extends POperacaologica
     public Object clone()
     {
         return new AMenorOperacaologica(
-            cloneNode(this._menorque_));
+            cloneNode(this._menorq_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AMenorOperacaologica extends POperacaologica
         ((Analysis) sw).caseAMenorOperacaologica(this);
     }
 
-    public TMenorque getMenorque()
+    public TMenorq getMenorq()
     {
-        return this._menorque_;
+        return this._menorq_;
     }
 
-    public void setMenorque(TMenorque node)
+    public void setMenorq(TMenorq node)
     {
-        if(this._menorque_ != null)
+        if(this._menorq_ != null)
         {
-            this._menorque_.parent(null);
+            this._menorq_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMenorOperacaologica extends POperacaologica
             node.parent(this);
         }
 
-        this._menorque_ = node;
+        this._menorq_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._menorque_);
+            + toString(this._menorq_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._menorque_ == child)
+        if(this._menorq_ == child)
         {
-            this._menorque_ = null;
+            this._menorq_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMenorOperacaologica extends POperacaologica
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._menorque_ == oldChild)
+        if(this._menorq_ == oldChild)
         {
-            setMenorque((TMenorque) newChild);
+            setMenorq((TMenorq) newChild);
             return;
         }
 

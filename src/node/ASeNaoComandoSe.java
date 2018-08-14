@@ -8,7 +8,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class ASeNaoComandoSe extends PComandoSe
 {
-    private PExpr _expr_;
+    private PExp _exp_;
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
     private final LinkedList<PComando> _segundo_ = new LinkedList<PComando>();
 
@@ -18,12 +18,12 @@ public final class ASeNaoComandoSe extends PComandoSe
     }
 
     public ASeNaoComandoSe(
-        @SuppressWarnings("hiding") PExpr _expr_,
+        @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") List<?> _comando_,
         @SuppressWarnings("hiding") List<?> _segundo_)
     {
         // Constructor
-        setExpr(_expr_);
+        setExp(_exp_);
 
         setComando(_comando_);
 
@@ -35,7 +35,7 @@ public final class ASeNaoComandoSe extends PComandoSe
     public Object clone()
     {
         return new ASeNaoComandoSe(
-            cloneNode(this._expr_),
+            cloneNode(this._exp_),
             cloneList(this._comando_),
             cloneList(this._segundo_));
     }
@@ -46,16 +46,16 @@ public final class ASeNaoComandoSe extends PComandoSe
         ((Analysis) sw).caseASeNaoComandoSe(this);
     }
 
-    public PExpr getExpr()
+    public PExp getExp()
     {
-        return this._expr_;
+        return this._exp_;
     }
 
-    public void setExpr(PExpr node)
+    public void setExp(PExp node)
     {
-        if(this._expr_ != null)
+        if(this._exp_ != null)
         {
-            this._expr_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -68,7 +68,7 @@ public final class ASeNaoComandoSe extends PComandoSe
             node.parent(this);
         }
 
-        this._expr_ = node;
+        this._exp_ = node;
     }
 
     public LinkedList<PComando> getComando()
@@ -127,7 +127,7 @@ public final class ASeNaoComandoSe extends PComandoSe
     public String toString()
     {
         return ""
-            + toString(this._expr_)
+            + toString(this._exp_)
             + toString(this._comando_)
             + toString(this._segundo_);
     }
@@ -136,9 +136,9 @@ public final class ASeNaoComandoSe extends PComandoSe
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._expr_ == child)
+        if(this._exp_ == child)
         {
-            this._expr_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -159,9 +159,9 @@ public final class ASeNaoComandoSe extends PComandoSe
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._expr_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpr((PExpr) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

@@ -27,7 +27,7 @@ public class CebolaSintatica {
                         }
                         Start ast = parser.parse();
                         if (!erroSintatico) {
-                            System.out.println("Codigo sintaticamente correto!");
+                            System.out.println("Codigo sintáticamente correto!");
                         }
                     } catch (LexerException e) {
                         erroSintatico = true;
@@ -40,11 +40,11 @@ public class CebolaSintatica {
                         x = e.getMessage().substring(a + 1, a + 3);
                         y = Integer.toString(Integer.parseInt(e.getMessage().substring(b + 1, c)) - lexer.desvio);
                         z = Integer.toString(Integer.parseInt(e.getMessage().substring(c + 1, d)));
-                        System.err.println("Erro lexico token deconhecido " + "[" + y + "," + z + "]:" + x);
+                        System.err.println("Erro léxico token deconhecido " + "[" + y + "," + z + "]:" + x);
                     } catch (Exception e) {
                         if (!erroSintatico) {
                             erroSintatico = true;
-                            System.err.println("Erro sinttico!:" + e.getMessage());
+                            System.err.println("Erro sintático!:" + e.getMessage());
                         }
                     }
                 }

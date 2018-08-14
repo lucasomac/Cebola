@@ -1,11 +1,10 @@
-package Semantica;
 
 public class Simbolo {
 
-    public static final int inteiro = 0;
-    public static final int caractere = 1;
-    public static final int real = 2;
-    public static final int booleano = 3;
+    public static final int INTEIRO = 0;
+    public static final int CARACTERE = 1;
+    public static final int REAL = 2;
+    public static final int BOOLEANO = 3;
     public static final int ERRO = -1;
 
     private int tipo;
@@ -34,13 +33,13 @@ public class Simbolo {
 
     public void setTipo(String tipo) {
         if (tipo.contains("inteiro")) {
-            this.tipo = Simbolo.inteiro;
+            this.tipo = Simbolo.INTEIRO;
         } else if (tipo.contains("real")) {
-            this.tipo = Simbolo.real;
+            this.tipo = Simbolo.REAL;
         } else if (tipo.contains("caractere")) {
-            this.tipo = Simbolo.caractere;
+            this.tipo = Simbolo.CARACTERE;
         } else {
-            System.out.println("ERRO tipo estranho:" + tipo);
+            System.out.println("ERRO tipo doido:" + tipo);
         }
     }
 

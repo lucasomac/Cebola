@@ -8,7 +8,7 @@ import analysis.*;
 public final class AVetorVar extends PVar
 {
     private TIdentificador _identificador_;
-    private PExpr _expr_;
+    private PExp _exp_;
 
     public AVetorVar()
     {
@@ -17,12 +17,12 @@ public final class AVetorVar extends PVar
 
     public AVetorVar(
         @SuppressWarnings("hiding") TIdentificador _identificador_,
-        @SuppressWarnings("hiding") PExpr _expr_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setIdentificador(_identificador_);
 
-        setExpr(_expr_);
+        setExp(_exp_);
 
     }
 
@@ -31,7 +31,7 @@ public final class AVetorVar extends PVar
     {
         return new AVetorVar(
             cloneNode(this._identificador_),
-            cloneNode(this._expr_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -65,16 +65,16 @@ public final class AVetorVar extends PVar
         this._identificador_ = node;
     }
 
-    public PExpr getExpr()
+    public PExp getExp()
     {
-        return this._expr_;
+        return this._exp_;
     }
 
-    public void setExpr(PExpr node)
+    public void setExp(PExp node)
     {
-        if(this._expr_ != null)
+        if(this._exp_ != null)
         {
-            this._expr_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +87,7 @@ public final class AVetorVar extends PVar
             node.parent(this);
         }
 
-        this._expr_ = node;
+        this._exp_ = node;
     }
 
     @Override
@@ -95,7 +95,7 @@ public final class AVetorVar extends PVar
     {
         return ""
             + toString(this._identificador_)
-            + toString(this._expr_);
+            + toString(this._exp_);
     }
 
     @Override
@@ -108,9 +108,9 @@ public final class AVetorVar extends PVar
             return;
         }
 
-        if(this._expr_ == child)
+        if(this._exp_ == child)
         {
-            this._expr_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -127,9 +127,9 @@ public final class AVetorVar extends PVar
             return;
         }
 
-        if(this._expr_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpr((PExpr) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

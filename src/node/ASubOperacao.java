@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class ASubOperacao extends POperacao
 {
-    private TSubtracao _subtracao_;
+    private TMenos _menos_;
 
     public ASubOperacao()
     {
@@ -15,10 +15,10 @@ public final class ASubOperacao extends POperacao
     }
 
     public ASubOperacao(
-        @SuppressWarnings("hiding") TSubtracao _subtracao_)
+        @SuppressWarnings("hiding") TMenos _menos_)
     {
         // Constructor
-        setSubtracao(_subtracao_);
+        setMenos(_menos_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ASubOperacao extends POperacao
     public Object clone()
     {
         return new ASubOperacao(
-            cloneNode(this._subtracao_));
+            cloneNode(this._menos_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ASubOperacao extends POperacao
         ((Analysis) sw).caseASubOperacao(this);
     }
 
-    public TSubtracao getSubtracao()
+    public TMenos getMenos()
     {
-        return this._subtracao_;
+        return this._menos_;
     }
 
-    public void setSubtracao(TSubtracao node)
+    public void setMenos(TMenos node)
     {
-        if(this._subtracao_ != null)
+        if(this._menos_ != null)
         {
-            this._subtracao_.parent(null);
+            this._menos_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ASubOperacao extends POperacao
             node.parent(this);
         }
 
-        this._subtracao_ = node;
+        this._menos_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._subtracao_);
+            + toString(this._menos_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._subtracao_ == child)
+        if(this._menos_ == child)
         {
-            this._subtracao_ = null;
+            this._menos_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ASubOperacao extends POperacao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._subtracao_ == oldChild)
+        if(this._menos_ == oldChild)
         {
-            setSubtracao((TSubtracao) newChild);
+            setMenos((TMenos) newChild);
             return;
         }
 

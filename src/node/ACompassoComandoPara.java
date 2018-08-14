@@ -9,9 +9,9 @@ import analysis.*;
 public final class ACompassoComandoPara extends PComandoPara
 {
     private PVar _var_;
-    private PParatipos _paratipos_;
-    private PParatipos _segundo_;
-    private PParatipos _terceiro_;
+    private PTipospara _tipospara_;
+    private PTipospara _segundo_;
+    private PTipospara _terceiro_;
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
 
     public ACompassoComandoPara()
@@ -21,15 +21,15 @@ public final class ACompassoComandoPara extends PComandoPara
 
     public ACompassoComandoPara(
         @SuppressWarnings("hiding") PVar _var_,
-        @SuppressWarnings("hiding") PParatipos _paratipos_,
-        @SuppressWarnings("hiding") PParatipos _segundo_,
-        @SuppressWarnings("hiding") PParatipos _terceiro_,
+        @SuppressWarnings("hiding") PTipospara _tipospara_,
+        @SuppressWarnings("hiding") PTipospara _segundo_,
+        @SuppressWarnings("hiding") PTipospara _terceiro_,
         @SuppressWarnings("hiding") List<?> _comando_)
     {
         // Constructor
         setVar(_var_);
 
-        setParatipos(_paratipos_);
+        setTipospara(_tipospara_);
 
         setSegundo(_segundo_);
 
@@ -44,7 +44,7 @@ public final class ACompassoComandoPara extends PComandoPara
     {
         return new ACompassoComandoPara(
             cloneNode(this._var_),
-            cloneNode(this._paratipos_),
+            cloneNode(this._tipospara_),
             cloneNode(this._segundo_),
             cloneNode(this._terceiro_),
             cloneList(this._comando_));
@@ -81,16 +81,16 @@ public final class ACompassoComandoPara extends PComandoPara
         this._var_ = node;
     }
 
-    public PParatipos getParatipos()
+    public PTipospara getTipospara()
     {
-        return this._paratipos_;
+        return this._tipospara_;
     }
 
-    public void setParatipos(PParatipos node)
+    public void setTipospara(PTipospara node)
     {
-        if(this._paratipos_ != null)
+        if(this._tipospara_ != null)
         {
-            this._paratipos_.parent(null);
+            this._tipospara_.parent(null);
         }
 
         if(node != null)
@@ -103,15 +103,15 @@ public final class ACompassoComandoPara extends PComandoPara
             node.parent(this);
         }
 
-        this._paratipos_ = node;
+        this._tipospara_ = node;
     }
 
-    public PParatipos getSegundo()
+    public PTipospara getSegundo()
     {
         return this._segundo_;
     }
 
-    public void setSegundo(PParatipos node)
+    public void setSegundo(PTipospara node)
     {
         if(this._segundo_ != null)
         {
@@ -131,12 +131,12 @@ public final class ACompassoComandoPara extends PComandoPara
         this._segundo_ = node;
     }
 
-    public PParatipos getTerceiro()
+    public PTipospara getTerceiro()
     {
         return this._terceiro_;
     }
 
-    public void setTerceiro(PParatipos node)
+    public void setTerceiro(PTipospara node)
     {
         if(this._terceiro_ != null)
         {
@@ -187,7 +187,7 @@ public final class ACompassoComandoPara extends PComandoPara
     {
         return ""
             + toString(this._var_)
-            + toString(this._paratipos_)
+            + toString(this._tipospara_)
             + toString(this._segundo_)
             + toString(this._terceiro_)
             + toString(this._comando_);
@@ -203,9 +203,9 @@ public final class ACompassoComandoPara extends PComandoPara
             return;
         }
 
-        if(this._paratipos_ == child)
+        if(this._tipospara_ == child)
         {
-            this._paratipos_ = null;
+            this._tipospara_ = null;
             return;
         }
 
@@ -239,21 +239,21 @@ public final class ACompassoComandoPara extends PComandoPara
             return;
         }
 
-        if(this._paratipos_ == oldChild)
+        if(this._tipospara_ == oldChild)
         {
-            setParatipos((PParatipos) newChild);
+            setTipospara((PTipospara) newChild);
             return;
         }
 
         if(this._segundo_ == oldChild)
         {
-            setSegundo((PParatipos) newChild);
+            setSegundo((PTipospara) newChild);
             return;
         }
 
         if(this._terceiro_ == oldChild)
         {
-            setTerceiro((PParatipos) newChild);
+            setTerceiro((PTipospara) newChild);
             return;
         }
 

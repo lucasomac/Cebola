@@ -9,7 +9,7 @@ public class SCebola extends AnalysisAdapter {
     HashMap<String, Simbolo> tabelaSimbolos;
 
     public SCebola() {
-        tabelaSimbolos = new HashMap<String, Simbolo>();
+        tabelaSimbolos = new HashMap<>();
     }
 
     private Simbolo getSimbolo(String valor) {

@@ -24,7 +24,7 @@ public class CebolaSemantica {
                     Start ast = parser.parse();
                     ast.toString();
                     if (!erroSintatico) {
-                        System.out.println("C�digo sint�ticamente correto!");
+                        System.out.println("Código Sintáticamente correto!");
                         Semantico semantica = new Semantico();
                         ast.apply(semantica);
                     }
@@ -39,11 +39,11 @@ public class CebolaSemantica {
                     x = e.getMessage().substring(a + 1, a + 3);
                     y = Integer.toString(Integer.parseInt(e.getMessage().substring(b + 1, c)) - lexer.desvio);
                     z = Integer.toString(Integer.parseInt(e.getMessage().substring(c + 1, d)));
-                    System.err.println("Erro l�xico token deconhecido " + "[" + y + "," + z + "]:" + x);
+                    System.err.println("Erro léxico token deconhecido " + "[" + y + "," + z + "]:" + x);
                 } catch (Exception e) {
                     if (!erroSintatico) {
                         erroSintatico = true;
-                        System.err.println("Erro sint�tico!:" + e.getMessage());
+                        System.err.println("Erro sintático!:" + e.getMessage());
                     }
                 }
             } catch (Exception e) {

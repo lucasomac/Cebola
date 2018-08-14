@@ -9,7 +9,7 @@ import analysis.*;
 public final class AComandoRepita extends PComandoRepita
 {
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
-    private PExpr _expr_;
+    private PExp _exp_;
 
     public AComandoRepita()
     {
@@ -18,12 +18,12 @@ public final class AComandoRepita extends PComandoRepita
 
     public AComandoRepita(
         @SuppressWarnings("hiding") List<?> _comando_,
-        @SuppressWarnings("hiding") PExpr _expr_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setComando(_comando_);
 
-        setExpr(_expr_);
+        setExp(_exp_);
 
     }
 
@@ -32,7 +32,7 @@ public final class AComandoRepita extends PComandoRepita
     {
         return new AComandoRepita(
             cloneList(this._comando_),
-            cloneNode(this._expr_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -67,16 +67,16 @@ public final class AComandoRepita extends PComandoRepita
         }
     }
 
-    public PExpr getExpr()
+    public PExp getExp()
     {
-        return this._expr_;
+        return this._exp_;
     }
 
-    public void setExpr(PExpr node)
+    public void setExp(PExp node)
     {
-        if(this._expr_ != null)
+        if(this._exp_ != null)
         {
-            this._expr_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -89,7 +89,7 @@ public final class AComandoRepita extends PComandoRepita
             node.parent(this);
         }
 
-        this._expr_ = node;
+        this._exp_ = node;
     }
 
     @Override
@@ -97,7 +97,7 @@ public final class AComandoRepita extends PComandoRepita
     {
         return ""
             + toString(this._comando_)
-            + toString(this._expr_);
+            + toString(this._exp_);
     }
 
     @Override
@@ -109,9 +109,9 @@ public final class AComandoRepita extends PComandoRepita
             return;
         }
 
-        if(this._expr_ == child)
+        if(this._exp_ == child)
         {
-            this._expr_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -140,9 +140,9 @@ public final class AComandoRepita extends PComandoRepita
             }
         }
 
-        if(this._expr_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpr((PExpr) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

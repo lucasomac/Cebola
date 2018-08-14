@@ -1,23 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import lexer.*;
-import node.*;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.PushbackReader;
+import lexer.LexerException;
+import node.Start;
 
+/**
+ *
+ * @author LUCAS DE OLIVEIRA MACEDO
+ */
 public class Cebola {
 
     public static void main(String[] args) {
         if (args.length > 0) {
             try {
-                MyLexer lexer = null;
-
-                if (!args[0].isEmpty()) {
-                    lexer = new MyLexer(new PushbackReader(new FileReader(args[0]), 1024));
-                } else {
-                    lexer = new MyLexer(new PushbackReader(new FileReader("entrada.txt"), 1024));
-                }
-
-                MeuParser parser = new MeuParser(lexer);
+                CebolaLexer lexer = new CebolaLexer(new PushbackReader(new FileReader(args[0]), 1024));
+                CebolaParser parser = new CebolaParser(lexer);
                 boolean erroSintatico = false;
 
                 while (true) {
@@ -27,7 +30,7 @@ public class Cebola {
                         }
                         Start ast = parser.parse();
                         if (!erroSintatico) {
-                            System.out.println("Codigo sintaticamente correto!");
+                            System.out.println("Código sintaticamente correto!");
                         }
                     } catch (LexerException e) {
                         erroSintatico = true;
@@ -44,7 +47,7 @@ public class Cebola {
                     } catch (Exception e) {
                         if (!erroSintatico) {
                             erroSintatico = true;
-                            System.err.println("Erro sinttico!:" + e.getMessage());
+                            System.err.println("Erro sintático!:" + e.getMessage());
                         }
                     }
                 }

@@ -9,7 +9,7 @@ import analysis.*;
 public final class ACebola extends PCebola
 {
     private TIdentificador _identificador_;
-    private final LinkedList<PDeclaracaoVariavel> _declaracaoVariavel_ = new LinkedList<PDeclaracaoVariavel>();
+    private final LinkedList<PDeclVar> _declVar_ = new LinkedList<PDeclVar>();
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
 
     public ACebola()
@@ -19,13 +19,13 @@ public final class ACebola extends PCebola
 
     public ACebola(
         @SuppressWarnings("hiding") TIdentificador _identificador_,
-        @SuppressWarnings("hiding") List<?> _declaracaoVariavel_,
+        @SuppressWarnings("hiding") List<?> _declVar_,
         @SuppressWarnings("hiding") List<?> _comando_)
     {
         // Constructor
         setIdentificador(_identificador_);
 
-        setDeclaracaoVariavel(_declaracaoVariavel_);
+        setDeclVar(_declVar_);
 
         setComando(_comando_);
 
@@ -36,7 +36,7 @@ public final class ACebola extends PCebola
     {
         return new ACebola(
             cloneNode(this._identificador_),
-            cloneList(this._declaracaoVariavel_),
+            cloneList(this._declVar_),
             cloneList(this._comando_));
     }
 
@@ -71,29 +71,29 @@ public final class ACebola extends PCebola
         this._identificador_ = node;
     }
 
-    public LinkedList<PDeclaracaoVariavel> getDeclaracaoVariavel()
+    public LinkedList<PDeclVar> getDeclVar()
     {
-        return this._declaracaoVariavel_;
+        return this._declVar_;
     }
 
-    public void setDeclaracaoVariavel(List<?> list)
+    public void setDeclVar(List<?> list)
     {
-        for(PDeclaracaoVariavel e : this._declaracaoVariavel_)
+        for(PDeclVar e : this._declVar_)
         {
             e.parent(null);
         }
-        this._declaracaoVariavel_.clear();
+        this._declVar_.clear();
 
         for(Object obj_e : list)
         {
-            PDeclaracaoVariavel e = (PDeclaracaoVariavel) obj_e;
+            PDeclVar e = (PDeclVar) obj_e;
             if(e.parent() != null)
             {
                 e.parent().removeChild(e);
             }
 
             e.parent(this);
-            this._declaracaoVariavel_.add(e);
+            this._declVar_.add(e);
         }
     }
 
@@ -128,7 +128,7 @@ public final class ACebola extends PCebola
     {
         return ""
             + toString(this._identificador_)
-            + toString(this._declaracaoVariavel_)
+            + toString(this._declVar_)
             + toString(this._comando_);
     }
 
@@ -142,7 +142,7 @@ public final class ACebola extends PCebola
             return;
         }
 
-        if(this._declaracaoVariavel_.remove(child))
+        if(this._declVar_.remove(child))
         {
             return;
         }
@@ -165,13 +165,13 @@ public final class ACebola extends PCebola
             return;
         }
 
-        for(ListIterator<PDeclaracaoVariavel> i = this._declaracaoVariavel_.listIterator(); i.hasNext();)
+        for(ListIterator<PDeclVar> i = this._declVar_.listIterator(); i.hasNext();)
         {
             if(i.next() == oldChild)
             {
                 if(newChild != null)
                 {
-                    i.set((PDeclaracaoVariavel) newChild);
+                    i.set((PDeclVar) newChild);
                     newChild.parent(this);
                     oldChild.parent(null);
                     return;

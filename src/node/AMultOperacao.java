@@ -7,7 +7,7 @@ import analysis.*;
 @SuppressWarnings("nls")
 public final class AMultOperacao extends POperacao
 {
-    private TMultiplicacao _multiplicacao_;
+    private TVezes _vezes_;
 
     public AMultOperacao()
     {
@@ -15,10 +15,10 @@ public final class AMultOperacao extends POperacao
     }
 
     public AMultOperacao(
-        @SuppressWarnings("hiding") TMultiplicacao _multiplicacao_)
+        @SuppressWarnings("hiding") TVezes _vezes_)
     {
         // Constructor
-        setMultiplicacao(_multiplicacao_);
+        setVezes(_vezes_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AMultOperacao extends POperacao
     public Object clone()
     {
         return new AMultOperacao(
-            cloneNode(this._multiplicacao_));
+            cloneNode(this._vezes_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AMultOperacao extends POperacao
         ((Analysis) sw).caseAMultOperacao(this);
     }
 
-    public TMultiplicacao getMultiplicacao()
+    public TVezes getVezes()
     {
-        return this._multiplicacao_;
+        return this._vezes_;
     }
 
-    public void setMultiplicacao(TMultiplicacao node)
+    public void setVezes(TVezes node)
     {
-        if(this._multiplicacao_ != null)
+        if(this._vezes_ != null)
         {
-            this._multiplicacao_.parent(null);
+            this._vezes_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMultOperacao extends POperacao
             node.parent(this);
         }
 
-        this._multiplicacao_ = node;
+        this._vezes_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._multiplicacao_);
+            + toString(this._vezes_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._multiplicacao_ == child)
+        if(this._vezes_ == child)
         {
-            this._multiplicacao_ = null;
+            this._vezes_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMultOperacao extends POperacao
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._multiplicacao_ == oldChild)
+        if(this._vezes_ == oldChild)
         {
-            setMultiplicacao((TMultiplicacao) newChild);
+            setVezes((TVezes) newChild);
             return;
         }
 
