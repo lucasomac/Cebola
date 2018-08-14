@@ -1,4 +1,4 @@
 # Cebola
 Compilador Cebola
 
-Te faz chora sempre que tenta mexer na implementação dele. 
+Te faz chorar sempre que tenta mexer na implementação dele. 
