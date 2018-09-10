@@ -16,7 +16,6 @@ public class CebolaLexico {
         if (args.length > 0) {
             try {
                 CebolaLexer lexer = new CebolaLexer(new PushbackReader(new FileReader(args[0]), 1024));
-                //JiloParser parser = new JiloParser(lexer);
                 //boolean erroSintatico = false;
                 while (true) {
                     try {

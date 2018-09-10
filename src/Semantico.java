@@ -115,7 +115,6 @@ public class Semantico extends DepthFirstAdapter {
     public int OperacaoExp(Node no) {
         // TODO Auto-generated method stub
         int ret = Simbolo.ERRO;
-        //AVariavelExp node = (AVariavelExp)no;
         switch (no.getClass().toString()) {
             case "class node.AOperacaoExp":
                 int resul_esq;

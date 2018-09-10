@@ -13,7 +13,7 @@ public class Cebola {
                 if (!args[0].isEmpty()) {
                     lexer = new CebolaLexer(new PushbackReader(new FileReader(args[0]), 1024));
                 } else {
-                    lexer = new CebolaLexer(new PushbackReader(new FileReader("entrada.txt"), 1024));
+                    lexer = new CebolaLexer(new PushbackReader(new FileReader("Code.ja"), 1024));
                 }
 
                 CebolaParser parser = new CebolaParser(lexer);

@@ -1,6 +1,6 @@
 /*
 	Universidade Federal de Sergipe
-	Departamento de Computação
+	Departamento de Computacao
 	Compilador Cebola
 	Alunos:  Lucas de Oliveira Macedo
 */
@@ -17,7 +17,7 @@ inicio
 	real: numeroReal2;		
 	iterr := entrada[opcao+24,5]*2;
 	Inteiro := numeroReal;
-	escreva('Olá mundo\n');	
+	escreva('Ol� mundo\n');	
 	escreva('Qual operacao deseja fazer?\n');
 	leia(opcao[0]);
 	leia(entrada);
@@ -74,5 +74,5 @@ inicio
 			escreva('Opcao invalida!');
 	fim avalie;
 
-escreva ('\nFim de execução...');
+escreva ('\nFIM');
 fim.
