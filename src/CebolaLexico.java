@@ -1,5 +1,4 @@
 
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PushbackReader;
@@ -15,12 +14,11 @@ public class CebolaLexico {
     public static void main(String[] args) {
         if (args.length > 0) {
             try {
-                CebolaLexer lexer = new CebolaLexer(new PushbackReader(new FileReader(args[0]), 1024));
+                CebolaLexer lexer = new CebolaLexer(new PushbackReader(new FileReader("in1.txt"), 1024));
                 //boolean erroSintatico = false;
                 while (true) {
                     try {
                         Token tok = lexer.next();
-                        //String nome_token = tok.getClass().getSimpleName();
                         if (!(tok instanceof EOF)) {
                             switch (tok.getClass().getSimpleName()) {
                                 case "TLf":

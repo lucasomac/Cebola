@@ -11,9 +11,9 @@ public class Cebola {
             try {
                 CebolaLexer lexer = null;
                 if (!args[0].isEmpty()) {
-                    lexer = new CebolaLexer(new PushbackReader(new FileReader(args[0]), 1024));
+                    lexer = new CebolaLexer(new PushbackReader(new FileReader(args[1]), 1024));
                 } else {
-                    lexer = new CebolaLexer(new PushbackReader(new FileReader("in.txt"), 1024));
+                    lexer = new CebolaLexer(new PushbackReader(new FileReader("entrada.txt"), 1024));
                 }
 
                 CebolaParser parser = new CebolaParser(lexer);

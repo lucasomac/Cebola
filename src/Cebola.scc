@@ -1,5 +1,5 @@
 /* 
-	Filename   : Jilo.ssc
+	Filename   : Cebola.ssc
 	Created on : 13/08/2018
 	Description: Gramatica para a disciplina de Compiladores
 */
@@ -97,7 +97,7 @@ comentado;
 // Gramatica da Sintaxe	
 //-------------------------------------------------	
  Productions 	
- cebola = programa identificador ptvirg inicio decl_var* comando* fim { -> New cebola (identificador, [decl_var], [comando])};	
+ cebola = programa identificador inicio decl_var* comando* fim { -> New cebola (identificador, [decl_var], [comando])};	
  //declaracao de variaveis e corpo do programa---------------------	
  decl_var =  {variavel} tipo doispt decl_var_virg* varld ptvirg { -> New decl_var.variavel (tipo, [decl_var_virg.varld], varld)}	
 					  |{dconstante}const identificador valor ptvirg { -> New decl_var.dconstante (identificador, valor)};	
@@ -130,7 +130,8 @@ mult {-> operacao} = {mult} vezes  {-> New operacao.mult(vezes)}
 fator {-> exp} =  {interno}apar expnum fpar {-> New exp.interno(expnum.exp)}	
 		| {negativo} menos fator {-> New exp.negativo(menos, fator.exp)}	
 		| {numero} numero {-> New exp.numero(numero)}	
-		| {real} numero_real {-> New exp.real(numero_real)}	
+		| {real} numero_real {-> New exp.real(numero_real)}
+                
 		| {variavel} var {-> New exp.variavel(var)};	
  //Operacoes logicas-----------------------------------------------	
 parabool {-> operacaologica} = {menorig} menorigual {-> New operacaologica.menorig (menorigual)}	
@@ -194,8 +195,10 @@ comando_para = {sempasso}para var de tipospara ate [segundo]: tipospara faca com
 comando_escrita = {normal}escreva apar exp fpar {-> New comando_escrita.normal(exp)} 	
                  |{str}escreva apar string fpar {-> New comando_escrita.str(string)};	
 	     	 	 	
-comando_leia = leia apar var fpar {-> New comando_leia(var)};	
-comando_atribuicao = var atribuicao expnum  {-> New comando_atribuicao(var,expnum.exp)};	
+comando_leia = leia apar varios_leia* var fpar {-> New comando_leia(var)};
+varios_leia = var virg;	
+comando_atribuicao = {inteiro} var atribuicao expnum  {-> New comando_atribuicao(var,expnum.exp)}| {string}var atribuicao string{-> New comando_atribuicao(var,string)};	
+
  //-------------------------------------------------	
 // Arvore de Sintaxe Abstrata	
 //-------------------------------------------------	
@@ -214,7 +217,8 @@ comando_atribuicao = var atribuicao expnum  {-> New comando_atribuicao(var,expnu
       |{negado} nao exp	
       |{interno} exp	
       |{numero} numero	
-      |{real} numero_real	
+      |{real} numero_real
+      
       |{variavel} var;	
 	  	
 var = {id} identificador	
@@ -254,7 +258,7 @@ comando_escrita = {normal} exp
 		| {str} string;	
 	     	 	 	
 comando_leia = var;	
-comando_atribuicao = var exp;			   	
+comando_atribuicao = {inteiro}var exp | {string}var string;			   	
 			   			   			   			   			       	
 			   	
 comando =  {leia} comando_leia 	
